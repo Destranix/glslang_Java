@@ -3,6 +3,19 @@ Provides JNI-Bindings and other utilities based on glslang.
 https://github.com/KhronosGroup/glslang
 
 ## Build
+### Dependencies
+Same as glslang:
+* A C++11 compiler.
+  (For MSVS: 2015 is recommended, 2013 is fully supported/tested, and 2010 support is attempted, but not tested.)
+* [CMake][cmake]: for generating compilation targets.
+* make: _Linux_, ninja is an alternative, if configured.
+* [Python 3.x][python]: for executing SPIRV-Tools scripts. (Optional if not using SPIRV-Tools and the 'External' subdirectory does not exist.)
+* [bison][bison]: _optional_, but needed when changing the grammar (glslang.y).
+* [googletest][googletest]: _optional_, but should use if making any changes to glslang.
+
+Additional Notes:
+* On Windows currently Visual Studio Build Tools are needed. `vcvarsall.bat`must be visible in shell opened by make.
+
 ### Build steps
 
 The following steps assume a Bash shell. On Windows, that could be the Git Bash
