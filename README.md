@@ -36,7 +36,7 @@ git clone https://github.com/Destranix/glslang_Java.git
 ```
 #### 3) Copy lib files
 
-Find glslang lib files in `$GLSLANG_BUILD_DIR`. They should lie under `/install` or `/$(pwd)/install`.
+Find glslang lib files in `$GLSLANG_BUILD_DIR`. They should lie under `$GLSLANG_BUILD_DIR/install` or `$GLSLANG_BUILD_DIR/$(pwd)/install`.
 Copy them into `$SOURCE_DIR/C/lib`.
 
 #### 4) Execute make
