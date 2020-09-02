@@ -2,7 +2,7 @@
 
 #include <jni.h>
 
-#include <Java_Main.h>
+#include <com_destranix_glslang_Main.h>
 
 #define ENABLE_HLSL
 
@@ -265,28 +265,28 @@ static bool cvector_contains(std::vector<T>* vector, T v, std::function<bool(T, 
 	return false;
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::map<int, std::vector<int>*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_size($<std::map<int, std::vector<int>*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_isEmpty($<std::map<int, std::vector<int>*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1containsKey
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1containsKey
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(int, int)> equals = [](int v1, int v2){
@@ -296,7 +296,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1containsKey
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1containsValue
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1containsValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jintArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(std::vector<int>*, std::vector<int>*)> equals = [](std::vector<int>* v1, std::vector<int>* v2){
@@ -324,7 +324,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1containsValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1get
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(int, int)> equals = [](int v1, int v2){
@@ -341,7 +341,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1put
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1put
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k, jintArray v){
 	JNI_METHOD_GUARD_ENTER
 	int* fetchedV = (int*) env->GetIntArrayElements(v, nullptr);
@@ -364,7 +364,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1put
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1remove
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<int>* retPtr = cmap_remove($<std::map<int, std::vector<int>*>*>(env _$ ptr), (int) k);
@@ -379,14 +379,14 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1remove
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	cmap_clear($<std::map<int, std::vector<int>*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1keys
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1keys
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	int* retPtr = cmap_keys($<std::map<int, std::vector<int>*>*>(env _$ ptr));
@@ -397,7 +397,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1keys
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jobjectArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1values
+JNIEXPORT jobjectArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1values
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<int>** retPtr = cmap_values($<std::map<int, std::vector<int>*>*>(env _$ ptr));
@@ -413,7 +413,7 @@ JNIEXPORT jobjectArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1values
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1entries
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCMap_1entries
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::pair<const int, std::vector<int>*>** retPtr = cmap_entries($<std::map<int, std::vector<int>*>*>(env _$ ptr));
@@ -421,21 +421,21 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedIntArrayCMap_1entries
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedIntArrayCEntry
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCEntry
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::pair<int, std::vector<int>*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntKeyedIntArrayCEntry_1getKey
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCEntry_1getKey
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return centry_getKey($<std::pair<int, std::vector<int>*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCEntry_1getValue
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCEntry_1getValue
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<int>* retPtr = centry_getValue($<std::pair<int, std::vector<int>*>*>(env _$ ptr));
@@ -449,7 +449,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCEntry_1getValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCEntry_1setValue
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedIntArrayCEntry_1setValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jintArray v){
 	JNI_METHOD_GUARD_ENTER
 	int* fetchedV = (int*) env->GetIntArrayElements(v, nullptr);
@@ -472,28 +472,28 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedIntArrayCEntry_1setValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::map<int, void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntKeyedCMap_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_size($<std::map<int, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedCMap_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_isEmpty($<std::map<int, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedCMap_1containsKey
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1containsKey
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(int, int)> equals = [](int v1, int v2){
@@ -503,7 +503,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedCMap_1containsKey
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedCMap_1containsValue
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1containsValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -513,7 +513,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntKeyedCMap_1containsValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1get
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(int, int)> equals = [](int v1, int v2){
@@ -528,7 +528,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1put
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1put
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = cmap_put($<std::map<int, void*>*>(env _$ ptr), (int) k, env _$ v);
@@ -540,7 +540,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1put
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1remove
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr, jint k){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = cmap_remove($<std::map<int, void*>*>(env _$ ptr), (int) k);
@@ -552,14 +552,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1remove
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_IntKeyedCMap_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	cmap_clear($<std::map<int, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedCMap_1keys
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1keys
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	int* retPtr = cmap_keys($<std::map<int, void*>*>(env _$ ptr));
@@ -570,7 +570,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntKeyedCMap_1keys
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1values
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1values
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>* ret = nullptr;
@@ -584,7 +584,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1values
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1entries
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCMap_1entries
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::pair<const int, void*>** retPtr = cmap_entries($<std::map<int, void*>*>(env _$ ptr));
@@ -597,28 +597,28 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCMap_1entries
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCEntry
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCEntry
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::pair<int, void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntKeyedCEntry_1getKey
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntKeyedCEntry_1getKey
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return centry_getKey($<std::pair<int, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCEntry_1getValue
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCEntry_1getValue
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ centry_getValue($<std::pair<int, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCEntry_1setValue
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntKeyedCEntry_1setValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = centry_setValue($<std::pair<int, void*>*>(env _$ ptr), env _$ v);
@@ -630,28 +630,28 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntKeyedCEntry_1setValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntCMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::map<void*, int>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCMap_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCMap_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_size($<std::map<void*, int>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntCMap_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntCMap_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_isEmpty($<std::map<void*, int>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntCMap_1containsKey
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntCMap_1containsKey
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -661,7 +661,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntCMap_1containsKey
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IntCMap_1containsValue
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IntCMap_1containsValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jint v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(int, int)> equals = [](int v1, int v2){
@@ -671,7 +671,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_IntCMap_1containsValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCMap_1get
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCMap_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -681,28 +681,28 @@ JNIEXPORT jint JNICALL Java_Java_Main_IntCMap_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCMap_1put
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCMap_1put
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_put($<std::map<void*, int>*>(env _$ ptr), env _$ k, (int) v);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCMap_1remove
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCMap_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_remove($<std::map<void*, int>*>(env _$ ptr), env _$ k);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_IntCMap_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_IntCMap_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	cmap_clear($<std::map<void*, int>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCMap_1keySet
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntCMap_1keySet
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::set<void*>* ret = nullptr;
@@ -716,7 +716,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCMap_1keySet
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jintArray JNICALL Java_Java_Main_IntCMap_1values
+JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_IntCMap_1values
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	int* retPtr = cmap_values($<std::map<void*, int>*>(env _$ ptr));
@@ -727,7 +727,7 @@ JNIEXPORT jintArray JNICALL Java_Java_Main_IntCMap_1values
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCMap_1entries
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntCMap_1entries
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::pair<void*, int>** retPtr = reinterpret_cast<std::pair<void*, int>**>(cmap_entries($<std::map<void*, int>*>(env _$ ptr)));
@@ -740,56 +740,56 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCMap_1entries
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCEntry
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntCEntry
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::pair<void*, int>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_IntCEntry_1getKey
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_IntCEntry_1getKey
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ centry_getKey($<std::pair<void*, int>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCEntry_1getValue
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCEntry_1getValue
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return centry_getValue($<std::pair<void*, int>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_IntCEntry_1setValue
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_IntCEntry_1setValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return centry_setValue($<std::pair<void*, int>*>(env _$ ptr), (int) v);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::map<void*, void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CMap_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CMap_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_size($<std::map<void*, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CMap_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CMap_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return cmap_isEmpty($<std::map<void*, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CMap_1containsKey
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CMap_1containsKey
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -799,7 +799,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CMap_1containsKey
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CMap_1containsValue
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CMap_1containsValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -809,7 +809,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CMap_1containsValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1get
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -824,7 +824,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1put
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1put
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = cmap_put($<std::map<void*, void*>*>(env _$ ptr), env _$ k, env _$ v);
@@ -836,7 +836,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1put
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1remove
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray k){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = cmap_remove($<std::map<void*, void*>*>(env _$ ptr), env _$ k);
@@ -848,14 +848,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1remove
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CMap_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CMap_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	cmap_clear($<std::map<void*, void*>*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1keySet
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1keySet
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::set<void*>* ret = nullptr;
@@ -869,7 +869,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1keySet
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1values
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1values
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>* ret = nullptr;
@@ -883,7 +883,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1values
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1entries
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CMap_1entries
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::pair<void*, void*>** retPtr = reinterpret_cast<std::pair<void*, void*>**>(cmap_entries($<std::map<void*, void*>*>(env _$ ptr)));
@@ -896,14 +896,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CMap_1entries
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CEntry
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::pair<void*, void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1getKey
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CEntry_1getKey
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = centry_getKey($<std::pair<void*, void*>*>(env _$ ptr));
@@ -915,7 +915,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1getKey
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1getValue
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CEntry_1getValue
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = centry_getValue($<std::pair<void*, void*>*>(env _$ ptr));
@@ -927,7 +927,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1getValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1setValue
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CEntry_1setValue
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = centry_setValue($<std::pair<void*, void*>*>(env _$ ptr), env _$ v);
@@ -939,14 +939,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CEntry_1setValue
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CPair
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::pair<void*, void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1getFirst
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CPair_1getFirst
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = $<std::pair<void*, void*>*>(env _$ ptr)->first;
@@ -958,7 +958,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1getFirst
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1getLast
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CPair_1getLast
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = $<std::pair<void*, void*>*>(env _$ ptr)->second;
@@ -970,7 +970,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1getLast
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1setFirst
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CPair_1setFirst
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = $<std::pair<void*, void*>*>(env _$ ptr)->first;
@@ -983,7 +983,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1setFirst
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1setLast
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CPair_1setLast
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = $<std::pair<void*, void*>*>(env _$ ptr)->second;
@@ -997,28 +997,28 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CPair_1setLast
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::list<void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CList_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CList_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::list<void**>*>(env _$ ptr)->size();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CList_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::list<void*>*>(env _$ ptr)->empty();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1contains
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CList_1contains
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1028,7 +1028,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1contains
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1iterator
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1iterator
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>* elem = $<std::list<void*>*>(env _$ ptr);
@@ -1039,7 +1039,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1iterator
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1add___3B_3B
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CList_1add___3B_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	$<std::list<void*>*>(env _$ ptr)->push_back(env _$ v);
@@ -1047,7 +1047,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1add___3B_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1remove___3B_3B
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CList_1remove___3B_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1065,7 +1065,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CList_1remove___3B_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CList_1insert
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CList_1insert
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>::iterator iter = $<std::list<void*>*>(env _$ ptr)->begin();
@@ -1074,14 +1074,14 @@ JNIEXPORT void JNICALL Java_Java_Main_CList_1insert
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CList_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CList_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	$<std::list<void*>*>(env _$ ptr)->clear();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1get
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = clist_get($<std::list<void*>*>(env _$ ptr), index);
@@ -1093,7 +1093,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1set
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1set
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = clist_get($<std::list<void*>*>(env _$ ptr), index);
@@ -1109,7 +1109,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1set
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CList_1add___3BI_3B
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CList_1add___3BI_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>::iterator iter = $<std::list<void*>*>(env _$ ptr)->begin();
@@ -1118,7 +1118,7 @@ JNIEXPORT void JNICALL Java_Java_Main_CList_1add___3BI_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1remove___3BI
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1remove___3BI
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = clist_get($<std::list<void*>*>(env _$ ptr), index);
@@ -1133,7 +1133,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1remove___3BI
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CList_1indexOf
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CList_1indexOf
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1143,7 +1143,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_CList_1indexOf
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CList_1lastIndexOf
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CList_1lastIndexOf
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1153,7 +1153,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_CList_1lastIndexOf
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1listIterator___3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1listIterator___3B
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>* elem = $<std::list<void*>*>(env _$ ptr);
@@ -1164,7 +1164,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1listIterator___3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1listIterator___3BI
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CList_1listIterator___3BI
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	std::list<void*>* elem = $<std::list<void*>*>(env _$ ptr);
@@ -1175,28 +1175,28 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CList_1listIterator___3BI
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::vector<void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CVector_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CVector_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::vector<void*>*>(env _$ ptr)->size();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CVector_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::vector<void*>*>(env _$ ptr)->empty();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1contains
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CVector_1contains
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1206,7 +1206,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1contains
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1iterator
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1iterator
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>* elem = $<std::vector<void*>*>(env _$ ptr);
@@ -1217,7 +1217,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1iterator
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1add___3B_3B
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CVector_1add___3B_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	$<std::vector<void*>*>(env _$ ptr)->push_back(env _$ v);
@@ -1225,7 +1225,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1add___3B_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1remove___3B_3B
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CVector_1remove___3B_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1243,7 +1243,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CVector_1remove___3B_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CVector_1insert
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CVector_1insert
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>::iterator iter = $<std::vector<void*>*>(env _$ ptr)->begin();
@@ -1252,14 +1252,14 @@ JNIEXPORT void JNICALL Java_Java_Main_CVector_1insert
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CVector_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CVector_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	$<std::vector<void*>*>(env _$ ptr)->clear();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1get
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1get
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = (*$<std::vector<void*>*>(env _$ ptr))[index];
@@ -1271,7 +1271,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1set
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1set
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = (*$<std::vector<void*>*>(env _$ ptr))[index];
@@ -1287,7 +1287,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1set
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CVector_1add___3BI_3B
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CVector_1add___3BI_3B
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>::iterator iter = $<std::vector<void*>*>(env _$ ptr)->begin();
@@ -1296,7 +1296,7 @@ JNIEXPORT void JNICALL Java_Java_Main_CVector_1add___3BI_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1remove___3BI
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1remove___3BI
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	void* ret = (*$<std::vector<void*>*>(env _$ ptr))[index];
@@ -1311,7 +1311,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1remove___3BI
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CVector_1indexOf
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CVector_1indexOf
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1321,7 +1321,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_CVector_1indexOf
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CVector_1lastIndexOf
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CVector_1lastIndexOf
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	std::function<bool(void*, void*)> equals = [](void* v1, void* v2){
@@ -1331,7 +1331,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_CVector_1lastIndexOf
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1listIterator___3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1listIterator___3B
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>* elem = $<std::vector<void*>*>(env _$ ptr);
@@ -1342,7 +1342,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1listIterator___3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1listIterator___3BI
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CVector_1listIterator___3BI
   (JNIEnv* env, jclass self, jbyteArray ptr, jint index){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>* elem = $<std::vector<void*>*>(env _$ ptr);
@@ -1353,35 +1353,35 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CVector_1listIterator___3BI
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CSet
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CSet
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<std::set<void*>*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CSet_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CSet_1size
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::set<void*>*>(env _$ ptr)->size();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CSet_1isEmpty
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CSet_1isEmpty
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::set<void*>*>(env _$ ptr)->empty();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CSet_1contains
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CSet_1contains
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	return ($<std::set<void*>*>(env _$ ptr)->find(env _$ v) != $<std::set<void*>*>(env _$ ptr)->end());
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CSet_1iterator
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CSet_1iterator
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	std::set<void*>* elem = $<std::set<void*>*>(env _$ ptr);
@@ -1392,14 +1392,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CSet_1iterator
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CSet_1add
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CSet_1add
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	return $<std::set<void*>*>(env _$ ptr)->insert(env _$ v).second;
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CSet_1remove
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CSet_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	bool ret = ($<std::set<void*>*>(env _$ ptr)->find(env _$ v) != $<std::set<void*>*>(env _$ ptr)->end());
@@ -1408,21 +1408,21 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_CSet_1remove
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CSet_1clear
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CSet_1clear
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	$<std::set<void*>*>(env _$ ptr)->clear();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CIterator_1hasNext
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CIterator_1hasNext
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CIterator<void*>*>(env _$ ptr)->hasNext();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CIterator_1next
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CIterator_1next
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	if(!$<CIterator<void*>*>(env _$ ptr)->hasNext()){
@@ -1434,14 +1434,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CIterator_1next
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CListIterator_1hasPrevious
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CListIterator_1hasPrevious
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CListIterator<void*>*>(env _$ ptr)->hasPrevious();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_CListIterator_1previous
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_CListIterator_1previous
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	if(!$<CListIterator<void*>*>(env _$ ptr)->hasPrevious()){
@@ -1453,21 +1453,21 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_CListIterator_1previous
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CListIterator_1nextIndex
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CListIterator_1nextIndex
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CListIterator<void*>*>(env _$ ptr)->nextIndex();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CListIterator_1previousIndex
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CListIterator_1previousIndex
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CListIterator<void*>*>(env _$ ptr)->previousIndex();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1remove
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CListIterator_1remove
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	try{
@@ -1478,7 +1478,7 @@ JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1remove
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1set
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CListIterator_1set
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	try{
@@ -1489,7 +1489,7 @@ JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1set
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1add
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_CListIterator_1add
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray v){
 	JNI_METHOD_GUARD_ENTER
 	try{
@@ -1500,14 +1500,14 @@ JNIEXPORT void JNICALL Java_Java_Main_CListIterator_1add
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CPrimitiveIterator_1OfDouble_1hasNext
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfDouble_1hasNext
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CIterator<double>*>(env _$ ptr)->hasNext();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jdouble JNICALL Java_Java_Main_CPrimitiveIterator_1OfDouble_1next
+JNIEXPORT jdouble JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfDouble_1next
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	if(!$<CIterator<double>*>(env _$ ptr)->hasNext()){
@@ -1519,14 +1519,14 @@ JNIEXPORT jdouble JNICALL Java_Java_Main_CPrimitiveIterator_1OfDouble_1next
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CPrimitiveIterator_1OfInt_1hasNext
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfInt_1hasNext
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CIterator<int>*>(env _$ ptr)->hasNext();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_CPrimitiveIterator_1OfInt_1next
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfInt_1next
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	if(!$<CIterator<int>*>(env _$ ptr)->hasNext()){
@@ -1538,14 +1538,14 @@ JNIEXPORT jint JNICALL Java_Java_Main_CPrimitiveIterator_1OfInt_1next
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_CPrimitiveIterator_1OfLong_1hasNext
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfLong_1hasNext
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<CIterator<long>*>(env _$ ptr)->hasNext();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jlong JNICALL Java_Java_Main_CPrimitiveIterator_1OfLong_1next
+JNIEXPORT jlong JNICALL Java_com_destranix_glslang_Main_CPrimitiveIterator_1OfLong_1next
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	if(!$<CIterator<long>*>(env _$ ptr)->hasNext()){
@@ -1557,7 +1557,7 @@ JNIEXPORT jlong JNICALL Java_Java_Main_CPrimitiveIterator_1OfLong_1next
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_CString_1Int_1op
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_CString_1Int_1op
   (JNIEnv* env, jclass self, jbyteArray ptr, jint i){
 	return toString(env, (*$<std::function<const char*(int)>*>(env _$ ptr))(i));
 }

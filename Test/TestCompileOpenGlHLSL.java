@@ -1,26 +1,26 @@
 package Test;
 
-import static Java.Main.FinalizeProcess;
-import static Java.Main.InitializeProcess;
+import static com.destranix.glslang.Main.FinalizeProcess;
+import static com.destranix.glslang.Main.InitializeProcess;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-import Java.EShClient;
-import Java.EShLanguage;
-import Java.EShMessages;
-import Java.EShSource;
-import Java.EShTargetClientVersion;
-import Java.EShTargetLanguage;
-import Java.EShTargetLanguageVersion;
-import Java.Global;
-import Java.SpvBuildLogger;
-import Java.SpvOptions;
-import Java.TBuiltInResource;
-import Java.TLimits;
-import Java.TProgram;
-import Java.TShader;
+import com.destranix.glslang.EShClient;
+import com.destranix.glslang.EShLanguage;
+import com.destranix.glslang.EShMessages;
+import com.destranix.glslang.EShSource;
+import com.destranix.glslang.EShTargetClientVersion;
+import com.destranix.glslang.EShTargetLanguage;
+import com.destranix.glslang.EShTargetLanguageVersion;
+import com.destranix.glslang.Global;
+import com.destranix.glslang.SpvBuildLogger;
+import com.destranix.glslang.SpvOptions;
+import com.destranix.glslang.TBuiltInResource;
+import com.destranix.glslang.TLimits;
+import com.destranix.glslang.TProgram;
+import com.destranix.glslang.TShader;
 
 public class TestCompileOpenGlHLSL {
 	public static final int[] defaultTBuiltInResourceValues = {

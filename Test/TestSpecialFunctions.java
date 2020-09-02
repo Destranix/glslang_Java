@@ -1,12 +1,12 @@
 package Test;
 
-import static Java.Main.*;
+import static com.destranix.glslang.Main.*;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import Java.GlslangError;
-import Java.GlslangErrorMode;
+import com.destranix.glslang.GlslangError;
+import com.destranix.glslang.GlslangErrorMode;
 
 public class TestSpecialFunctions {
 

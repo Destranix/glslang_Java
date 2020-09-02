@@ -1,13 +1,13 @@
 package Test;
 
-import static Java.Main.*;
+import static com.destranix.glslang.Main.*;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import Java.EShExecutable;
-import Java.EShLanguage;
-import Java.EShOptimizationLevel;
+import com.destranix.glslang.EShExecutable;
+import com.destranix.glslang.EShLanguage;
+import com.destranix.glslang.EShOptimizationLevel;
 
 public class TestPureC {
 	

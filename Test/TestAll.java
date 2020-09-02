@@ -1,7 +1,7 @@
 package Test;
 
-import static Java.Main.FinalizeProcess;
-import static Java.Main.InitializeProcess;
+import static com.destranix.glslang.Main.FinalizeProcess;
+import static com.destranix.glslang.Main.InitializeProcess;
 
 import java.io.IOException;
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#define JAVA_PACKAGE_PATH(REL) "com/destranix/glslang" #REL
+
 #define GLSLANG_ERROR_NONE 0
 #define GLSLANG_ERROR_INVALID_LENGTH 1
 #define GLSLANG_ERROR_ARRAY_INDEX_OUT_OF_BOUNDS 2

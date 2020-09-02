@@ -16,7 +16,7 @@
 	#pragma GCC diagnostic ignored "-Woverflow"
 #endif
 
-#include <Java_Main.h>
+#include <com_destranix_glslang_Main.h>
 #include <glslang/Public/ShaderLang.h>
 #include <glslang/Include/ShHandle.h>
 #include <glslang/Include/BaseTypes.h>
@@ -43,224 +43,224 @@
 
 using namespace glslang;
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_GetVersion
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_GetVersion
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ glslang::GetVersion();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetEsslVersionString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetEsslVersionString
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, GetEsslVersionString());
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetGlslVersionString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetGlslVersionString
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, GetGlslVersionString());
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_GetKhronosToolId
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_GetKhronosToolId
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return (jint) GetKhronosToolId();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_InitializeProcess
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_InitializeProcess
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return (jboolean) InitializeProcess();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_FinalizeProcess
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_FinalizeProcess
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	FinalizeProcess();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ConstructCompiler
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ConstructCompiler
   (JNIEnv* env, jclass self, jint language, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ ConstructCompiler($<EShLanguage>(language), i);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ConstructLinker
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ConstructLinker
   (JNIEnv* env, jclass self, jint executable, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ ConstructLinker($<EShExecutable>(executable), i);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ConstructBindings
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ConstructBindings
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ ConstructBindings();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_DeleteLinker
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_DeleteLinker
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	DeleteLinker($<TShHandleBase*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_DeleteBindingList
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_DeleteBindingList
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	DeleteBindingList($<TShHandleBase*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ConstructUniformMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ConstructUniformMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ ConstructUniformMap();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_DeleteCompiler
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_DeleteCompiler
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	DeleteCompiler($<TCompiler*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_DeleteUniformMap
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_DeleteUniformMap
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	DeleteUniformMap($<TUniformMap*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetStorageQualifierString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetStorageQualifierString
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, GetStorageQualifierString($<TStorageQualifier>(i)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetPrecisionQualifierString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetPrecisionQualifierString
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, GetPrecisionQualifierString($<TPrecisionQualifier>(i)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetBuiltInVariableString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetBuiltInVariableString
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, GetBuiltInVariableString($<TBuiltInVariable>(i)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_isTypeSignedInt
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_isTypeSignedInt
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return isTypeSignedInt($<TBasicType>(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_isTypeUnsignedInt
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_isTypeUnsignedInt
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return isTypeUnsignedInt($<TBasicType>(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_isTypeInt
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_isTypeInt
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return isTypeInt($<TBasicType>(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_isTypeFloat
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_isTypeFloat
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return isTypeFloat($<TBasicType>(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_getTypeRank
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_getTypeRank
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return getTypeRank($<TBasicType>(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_GetThreadPoolAllocator
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_GetThreadPoolAllocator
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ GetThreadPoolAllocator();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_SetThreadPoolAllocator
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_SetThreadPoolAllocator
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	SetThreadPoolAllocator($<TPoolAllocator*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_IsAnonymous
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_IsAnonymous
   (JNIEnv* env, jclass self, jstring s){
 	JNI_METHOD_GUARD_ENTER
 	return IsAnonymous(*toTString(env, s));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_RemoveAllTreeNodes
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_RemoveAllTreeNodes
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	RemoveAllTreeNodes($<TIntermNode*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_PropagateNoContraction
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_PropagateNoContraction
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	PropagateNoContraction(*$<TIntermediate*>(env _$ ptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_SameSpecializationConstants
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_SameSpecializationConstants
   (JNIEnv* env, jclass self, jbyteArray t0, jbyteArray t1){
 	JNI_METHOD_GUARD_ENTER
 	return SameSpecializationConstants($<TIntermTyped*>(env _$ t0), $<TIntermTyped*>(env _$ t1));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ProfileName
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ProfileName
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, ProfileName($<EProfile>(i)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_Min
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Min
   (JNIEnv* env, jclass self, jbyteArray t0, jbyteArray t1, jlong classIdentifier){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Min(env _$ t0, env _$ t1);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_Max
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Max
   (JNIEnv* env, jclass self, jbyteArray t0, jbyteArray t1, jlong classIdentifier){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Max(env _$ t0, env _$ t1);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_String
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_String
   (JNIEnv* env, jclass self, jint i, jint base){
 	JNI_METHOD_GUARD_ENTER
 	TString tmp = String(i, base);
@@ -268,7 +268,7 @@ JNIEXPORT jstring JNICALL Java_Java_Main_String
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_TPragmaTable_1IsPow2
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TPragmaTable_1IsPow2
 	(JNIEnv* env, jclass self, jbyteArray powerOf2){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -276,14 +276,14 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_TPragmaTable_1IsPow2
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_TPragmaTable_1RoundToPow2
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TPragmaTable_1RoundToPow2
 	(JNIEnv* env, jclass self, jbyteArray number, jint powerOf2){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jboolean JNICALL Java_Java_Main_TPragmaTable_1IsMultipleOfPow2
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TPragmaTable_1IsMultipleOfPow2
 	(JNIEnv* env, jclass self, jbyteArray number, jint powerOf2){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -291,7 +291,7 @@ JNIEXPORT jboolean JNICALL Java_Java_Main_TPragmaTable_1IsMultipleOfPow2
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_GetSpirvVersion
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_GetSpirvVersion
   (JNIEnv* env, jclass self, jobjectArray s){
 	JNI_METHOD_GUARD_ENTER
 	std::string sRef;
@@ -301,14 +301,14 @@ JNIEXPORT void JNICALL Java_Java_Main_GetSpirvVersion
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_GetSpirvGeneratorVersion
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_GetSpirvGeneratorVersion
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return GetSpirvGeneratorVersion();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_GlslangToSpv___3B_3_3J_3B
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_GlslangToSpv___3B_3_3J_3B
   (JNIEnv* env, jclass self, jbyteArray intermediate, jobjectArray spirv, jbyteArray options){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<unsigned int> spirvRef;
@@ -321,7 +321,7 @@ JNIEXPORT void JNICALL Java_Java_Main_GlslangToSpv___3B_3_3J_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_GlslangToSpv___3B_3_3J_3B_3B
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_GlslangToSpv___3B_3_3J_3B_3B
   (JNIEnv* env, jclass self, jbyteArray intermediate, jobjectArray spirv, jbyteArray logger, jbyteArray options){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<unsigned int> spirvRef;
@@ -334,7 +334,7 @@ JNIEXPORT void JNICALL Java_Java_Main_GlslangToSpv___3B_3_3J_3B_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_OutputSpvBin
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_OutputSpvBin
   (JNIEnv* env, jclass self, jlongArray spirv, jstring baseName){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = (jlong*) env->GetLongArrayElements(spirv, nullptr);
@@ -345,7 +345,7 @@ JNIEXPORT void JNICALL Java_Java_Main_OutputSpvBin
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_OutputSpvHex
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_OutputSpvHex
   (JNIEnv* env, jclass self, jlongArray spirv, jstring baseName, jstring varName){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = env->GetLongArrayElements(spirv, nullptr);
@@ -356,7 +356,7 @@ JNIEXPORT void JNICALL Java_Java_Main_OutputSpvHex
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsDisassemble
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_SpirvToolsDisassemble
   (JNIEnv* env, jclass self, jobject out, jlongArray spirv){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = (jlong*) env->GetLongArrayElements(spirv, nullptr);
@@ -369,7 +369,7 @@ JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsDisassemble
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsValidate
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_SpirvToolsValidate
   (JNIEnv* env, jclass self, jbyteArray intermediate, jlongArray spirv, jbyteArray logger, jboolean prelegalization){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = env->GetLongArrayElements(spirv, nullptr);
@@ -380,7 +380,7 @@ JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsValidate
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsTransform
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_SpirvToolsTransform
   (JNIEnv* env, jclass self, jbyteArray intermediate, jlongArray spirv, jbyteArray logger, jbyteArray options){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = env->GetLongArrayElements(spirv, nullptr);
@@ -391,7 +391,7 @@ JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsTransform
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsStripDebugInfo
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_SpirvToolsStripDebugInfo
   (JNIEnv* env, jclass self, jbyteArray intermediate, jlongArray spirv, jbyteArray logger){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = env->GetLongArrayElements(spirv, nullptr);
@@ -402,14 +402,14 @@ JNIEXPORT void JNICALL Java_Java_Main_SpirvToolsStripDebugInfo
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_BitwiseCast
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_BitwiseCast
   (JNIEnv* env, jclass self, jbyteArray source){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ spvutils::BitwiseCast<void*, void*>(env _$ source);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_Disassemble
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Disassemble
   (JNIEnv* env, jclass self, jobject out, jlongArray spirv){
 	JNI_METHOD_GUARD_ENTER
 	jlong* fetchedSpirv = env->GetLongArrayElements(spirv, nullptr);
@@ -422,126 +422,126 @@ JNIEXPORT void JNICALL Java_Java_Main_Disassemble
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_Parameterize
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Parameterize
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	spv::Parameterize();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_SourceString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_SourceString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::SourceString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_AddressingString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_AddressingString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::AddressingString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_MemoryString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_MemoryString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::MemoryString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ExecutionModelString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ExecutionModelString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ExecutionModelString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ExecutionModeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ExecutionModeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ExecutionModeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_StorageClassString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_StorageClassString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::StorageClassString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_DecorationString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_DecorationString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::DecorationString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_BuiltInString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_BuiltInString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::BuiltInString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_DimensionString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_DimensionString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::DimensionString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_SelectControlString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_SelectControlString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::SelectControlString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_LoopControlString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_LoopControlString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::LoopControlString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_FunctionControlString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_FunctionControlString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::FunctionControlString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_SamplerAddressingModeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_SamplerAddressingModeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::SamplerAddressingModeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_SamplerFilterModeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_SamplerFilterModeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::SamplerFilterModeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageFormatString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageFormatString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ImageFormatString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageChannelOrderString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageChannelOrderString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ImageChannelOrderString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageChannelTypeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageChannelTypeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -550,21 +550,21 @@ JNIEXPORT jstring JNICALL Java_Java_Main_ImageChannelTypeString
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageChannelDataTypeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageChannelDataTypeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ImageChannelDataTypeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageOperandsString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageOperandsString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ImageOperandsString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ImageOperands
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ImageOperands
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -573,56 +573,56 @@ JNIEXPORT jstring JNICALL Java_Java_Main_ImageOperands
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_FPFastMathString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_FPFastMathString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::FPFastMathString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_FPRoundingModeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_FPRoundingModeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::FPRoundingModeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_LinkageTypeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_LinkageTypeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::LinkageTypeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_FuncParamAttrString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_FuncParamAttrString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::FuncParamAttrString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_AccessQualifierString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_AccessQualifierString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::AccessQualifierString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_MemorySemanticsString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_MemorySemanticsString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::MemorySemanticsString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_MemoryAccessString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_MemoryAccessString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::MemoryAccessString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ExecutionScopeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ExecutionScopeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -631,49 +631,49 @@ JNIEXPORT jstring JNICALL Java_Java_Main_ExecutionScopeString
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GroupOperationString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GroupOperationString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::GroupOperationString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_KernelEnqueueFlagsString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_KernelEnqueueFlagsString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::KernelEnqueueFlagsString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_KernelProfilingInfoString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_KernelProfilingInfoString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::KernelProfilingInfoString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_CapabilityString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_CapabilityString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::CapabilityString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_OpcodeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_OpcodeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::OpcodeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ScopeString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ScopeString
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, spv::ScopeString(v));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_GetOperandDesc
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_GetOperandDesc
   (JNIEnv* env, jclass self, jint v){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -682,7 +682,7 @@ JNIEXPORT jstring JNICALL Java_Java_Main_GetOperandDesc
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_PrintImmediateRow
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_PrintImmediateRow
   (JNIEnv* env, jclass self, jint imm, jstring name, jbyteArray enumParams, jboolean caps, jboolean hex){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -690,7 +690,7 @@ JNIEXPORT void JNICALL Java_Java_Main_PrintImmediateRow
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_PrintOperands
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_PrintOperands
   (JNIEnv* env, jclass self, jbyteArray operands, jint reservedOperands){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
@@ -698,7 +698,7 @@ JNIEXPORT void JNICALL Java_Java_Main_PrintOperands
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_HasResultAndType
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_HasResultAndType
   (JNIEnv* env, jclass self, jint opcode, jbooleanArray hasResult, jbooleanArray hasResultType){
 	JNI_METHOD_GUARD_ENTER
 	bool hasResultRef = false;
@@ -709,11 +709,11 @@ JNIEXPORT void JNICALL Java_Java_Main_HasResultAndType
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_inReadableOrder
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_inReadableOrder
   (JNIEnv* env, jclass self, jbyteArray root, jobject callback){
 	JNI_METHOD_GUARD_ENTER
 	std::function<void(JNIEnv*, spv::Block*, spv::ReachReason, spv::Block*)> callbackTmp([callback](JNIEnv* env, spv::Block* b0, spv::ReachReason reason, spv::Block* header){
-		jclass clazz = env->FindClass("Java/Main$Void_BytearrayIntBytearray");
+		jclass clazz = env->FindClass(JAVA_PACKAGE_PATH(/Main$Void_BytearrayIntBytearray));
 		jmethodID id = env->GetMethodID(clazz, "op", "([BI[B)V");
 		env->CallVoidMethod(callback, id, env $_ b0, reason, env $_ header);
 	});
@@ -723,21 +723,21 @@ JNIEXPORT void JNICALL Java_Java_Main_inReadableOrder
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_TString
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TString
   (JNIEnv* env, jclass self, jstring s){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ NewPoolTString(toChars(env, s));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_TString_1asString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_TString_1asString
   (JNIEnv* env, jclass self, jbyteArray s){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, $<TString*>(env _$ s));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_allocString
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_allocString
   (JNIEnv* env, jclass self, jstring str){
 	JNI_METHOD_GUARD_ENTER
 	char* strRef = (char*) (env)->GetStringUTFChars(str, nullptr);
@@ -749,7 +749,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_allocString
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_createArray
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_createArray
   (JNIEnv* env, jclass self, jobjectArray pointers){
 	JNI_METHOD_GUARD_ENTER
 	int length = (env)->GetArrayLength(pointers);
@@ -762,7 +762,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_createArray
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_Array_1size
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_Array_1size
   (JNIEnv* env, jclass self, jbyteArray a){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>* array = $<std::vector<void*>*>(env _$ a);
@@ -770,7 +770,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_Array_1size
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_Array_1get
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Array_1get
   (JNIEnv* env, jclass self, jbyteArray a, jint i){
 	JNI_METHOD_GUARD_ENTER
 	std::vector<void*>* array = $<std::vector<void*>*>(env _$ a);
@@ -784,7 +784,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_Array_1get
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_delete
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_delete
   (JNIEnv* env, jclass self, jbyteArray a){
 	JNI_METHOD_GUARD_ENTER
 	void* elem = (env _$ a);
@@ -792,42 +792,42 @@ JNIEXPORT void JNICALL Java_Java_Main_delete
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_resetLastErrorCode
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_resetLastErrorCode
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NONE);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_getLastErrorCode
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_getLastErrorCode
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return getLastError();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_getLastErrorString
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_getLastErrorString
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, getErrorString(getLastError()));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_getErrorStringFromCode
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_getErrorStringFromCode
   (JNIEnv* env, jclass self, jint i){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, getErrorString(i));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_setErrorMode
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_setErrorMode
   (JNIEnv* env, jclass self, jint mode){
 	JNI_METHOD_GUARD_ENTER
 	setErrorMode($<GlslangErrorMode>(mode));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_setCatchCExceptions
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_setCatchCExceptions
   (JNIEnv* env, jclass self, jboolean v){
 	setCatchCExceptions(v);
 }

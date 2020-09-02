@@ -1,10 +1,10 @@
 package Test;
 
-import static Java.Main.ShFinalize;
-import static Java.Main.ShInitialize;
-import static Java.Main.TLimits;
-import static Java.Main.delete;
-import static Java.Main.getLastErrorCode;
+import static com.destranix.glslang.Main.ShFinalize;
+import static com.destranix.glslang.Main.ShInitialize;
+import static com.destranix.glslang.Main.TLimits;
+import static com.destranix.glslang.Main.delete;
+import static com.destranix.glslang.Main.getLastErrorCode;
 
 import java.io.IOException;
 import java.util.Arrays;

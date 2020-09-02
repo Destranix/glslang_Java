@@ -1,6 +1,6 @@
 package Test;
 
-import static Java.Main.*;
+import static com.destranix.glslang.Main.*;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -9,24 +9,24 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map.Entry;
 
-import Java.CList;
-import Java.CMap;
-import Java.CPair;
-import Java.CSet;
-import Java.CVector;
-import Java.EProfile;
-import Java.EShLanguage;
-import Java.Global;
-import Java.IntCMap;
-import Java.IntKeyedCMap;
-import Java.IntKeyedIntArrayCMap;
-import Java.PointerBoundObject;
-import Java.SpvVersionStruct;
-import Java.TConstUnion;
-import Java.TInfoSink;
-import Java.TIntermediate;
-import Java.TParseContext;
-import Java.TSymbolTable;
+import com.destranix.glslang.CList;
+import com.destranix.glslang.CMap;
+import com.destranix.glslang.CPair;
+import com.destranix.glslang.CSet;
+import com.destranix.glslang.CVector;
+import com.destranix.glslang.EProfile;
+import com.destranix.glslang.EShLanguage;
+import com.destranix.glslang.Global;
+import com.destranix.glslang.IntCMap;
+import com.destranix.glslang.IntKeyedCMap;
+import com.destranix.glslang.IntKeyedIntArrayCMap;
+import com.destranix.glslang.PointerBoundObject;
+import com.destranix.glslang.SpvVersionStruct;
+import com.destranix.glslang.TConstUnion;
+import com.destranix.glslang.TInfoSink;
+import com.destranix.glslang.TIntermediate;
+import com.destranix.glslang.TParseContext;
+import com.destranix.glslang.TSymbolTable;
 
 public class TestSpecialConstellationsAndStructures {
 

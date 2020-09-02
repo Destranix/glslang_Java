@@ -8,26 +8,26 @@
 
 #define ENABLE_HLSL
 
-#include <Java_Main.h>
+#include <com_destranix_glslang_Main.h>
 #include <glslang/Public/ShaderLang.h>
 
 #include <Utils.h>
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShInitialize
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShInitialize
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return (jint) ShInitialize();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShFinalize
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShFinalize
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return (jint) ShFinalize();
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBinding__Ljava_lang_String_2I
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShBinding__Ljava_lang_String_2I
   (JNIEnv* env, jclass self, jstring name, jint binding){
 	JNI_METHOD_GUARD_ENTER
 	ShBinding* ret = Pool_malloc($<ShBinding*>(nullptr));
@@ -37,35 +37,35 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBinding__Ljava_lang_String_2I
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBinding__
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShBinding__
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<ShBinding*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShBinding_1setName
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShBinding_1setName
   (JNIEnv* env, jclass self, jbyteArray ptr, jstring name){
 	JNI_METHOD_GUARD_ENTER
 	$<ShBinding*>(env _$ ptr)->name = toChars(env, name);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShBinding_1setBinding
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShBinding_1setBinding
   (JNIEnv* env, jclass self, jbyteArray ptr, jint binding){
 	JNI_METHOD_GUARD_ENTER
 	$<ShBinding*>(env _$ ptr)->binding = binding;
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ShBinding_1getName
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ShBinding_1getName
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return toString(env, $<ShBinding*>(env _$ ptr)->name);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShBinding_1getBinding
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShBinding_1getBinding
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<ShBinding*>(env _$ ptr)->binding;
@@ -73,7 +73,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_ShBinding_1getBinding
 }
 
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBindingTable__I_3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShBindingTable__I_3B
   (JNIEnv* env, jclass self, jint numBindings, jbyteArray bindings){
 	JNI_METHOD_GUARD_ENTER
 	ShBindingTable* bindingTable = Pool_malloc($<ShBindingTable*>(nullptr));
@@ -83,35 +83,35 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBindingTable__I_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBindingTable__
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShBindingTable__
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<ShBindingTable*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShBindingTable_1setNumBindings
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShBindingTable_1setNumBindings
   (JNIEnv* env, jclass self, jbyteArray ptr, jint numBindings){
 	JNI_METHOD_GUARD_ENTER
 	$<ShBindingTable*>(env _$ ptr)->numBindings = numBindings;
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShBindingTable_1setBindings
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShBindingTable_1setBindings
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray bindings){
 	JNI_METHOD_GUARD_ENTER
 	$<ShBindingTable*>(env _$ ptr)->bindings = $<ShBinding*>(env _$ bindings);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShBindingTable_1getNumBindings
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShBindingTable_1getNumBindings
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return $<ShBindingTable*>(env _$ ptr)->numBindings;
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBindingTable_1getBindings
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShBindingTable_1getBindings
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ $<ShBindingTable*>(env _$ ptr)->bindings;
@@ -119,42 +119,42 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShBindingTable_1getBindings
 }
 
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShConstructCompiler
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShConstructCompiler
   (JNIEnv* env, jclass self, jint language, jint debugOptions){
 	JNI_METHOD_GUARD_ENTER
 	return pointerToByteArray(env, ShConstructCompiler(static_cast<EShLanguage>((int) language), (int) debugOptions));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShConstructLinker
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShConstructLinker
   (JNIEnv* env, jclass self, jint execute, jint debugOptions){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ ShConstructLinker(static_cast<EShExecutable>((int) execute), (int) debugOptions);
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShConstructUniformMap
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShConstructUniformMap
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return pointerToByteArray(env, ShConstructUniformMap());
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShDestruct
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShDestruct
   (JNIEnv* env, jclass self, jbyteArray handle){
 	JNI_METHOD_GUARD_ENTER
 	ShDestruct(byteArrayToPointer(env, handle));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_TBuiltInResource__
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TBuiltInResource__
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<TBuiltInResource*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_TBuiltInResource___3I_3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TBuiltInResource___3I_3B
   (JNIEnv* env, jclass self, jintArray values, jbyteArray limits){
 	JNI_METHOD_GUARD_ENTER
 	struct TLimits* limitsRet = (struct TLimits*) byteArrayToPointer(env, limits);
@@ -266,14 +266,14 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_TBuiltInResource___3I_3B
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_TLimits__
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TLimits__
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
 	return env $_ Pool_malloc($<TLimits*>(nullptr));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_TLimits___3Z
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TLimits___3Z
   (JNIEnv* env, jclass self, jbooleanArray values){
 	JNI_METHOD_GUARD_ENTER
 	struct TLimits* data = Pool_malloc($<TLimits*>(nullptr));
@@ -299,7 +299,7 @@ JNIEXPORT jbyteArray JNICALL Java_Java_Main_TLimits___3Z
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShCompile
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShCompile
   (JNIEnv* env, jclass self, jbyteArray handle, jobjectArray shaderStrings, jint numStrings, jint optimizationLevel, jbyteArray resources, jint debugOptions, jint defaultVersion, jboolean forwardCompatible, jint messages){
 	JNI_METHOD_GUARD_ENTER
 	char** shaderStringsRetMutable = new char*[numStrings];
@@ -336,7 +336,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_ShCompile
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShLinkExt
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShLinkExt
   (JNIEnv* env, jclass self, jbyteArray handle, jbyteArray h, jint numHandles){
 	JNI_METHOD_GUARD_ENTER
 	const ShHandle* hPtr = &((*static_cast<std::vector<void*>*>(env _$ h))[0]);
@@ -344,13 +344,13 @@ JNIEXPORT jint JNICALL Java_Java_Main_ShLinkExt
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_Java_Main_ShSetEncryptionMethod
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_ShSetEncryptionMethod
   (JNIEnv* env, jclass self, jbyteArray handle){
 	JNI_METHOD_GUARD_ENTER
 	ShSetEncryptionMethod(byteArrayToPointer(env, handle));
 	JNI_METHOD_GUARD_LEAVE}
 
-JNIEXPORT jstring JNICALL Java_Java_Main_ShGetInfoLog
+JNIEXPORT jstring JNICALL Java_com_destranix_glslang_Main_ShGetInfoLog
   (JNIEnv* env, jclass self, jbyteArray handle){
 	JNI_METHOD_GUARD_ENTER
 	const char* ret = ShGetInfoLog(byteArrayToPointer(env, handle));
@@ -366,28 +366,28 @@ JNIEXPORT jstring JNICALL Java_Java_Main_ShGetInfoLog
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_Java_Main_ShGetExecutable
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_ShGetExecutable
   (JNIEnv* env, jclass self, jbyteArray handle){
 	JNI_METHOD_GUARD_ENTER
 	return pointerToByteArray(env, ShGetExecutable(byteArrayToPointer(env, handle)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShSetVirtualAttributeBindings
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShSetVirtualAttributeBindings
   (JNIEnv* env, jclass self, jbyteArray handle, jbyteArray bindingTable){
 	JNI_METHOD_GUARD_ENTER
 	return (jint) ShSetVirtualAttributeBindings(byteArrayToPointer(env, handle), static_cast<ShBindingTable*>(byteArrayToPointer(env, bindingTable)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShSetFixedAttributeBindings
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShSetFixedAttributeBindings
   (JNIEnv* env, jclass self, jbyteArray handle, jbyteArray bindingTable){
 	JNI_METHOD_GUARD_ENTER
 	return (jint) ShSetFixedAttributeBindings(byteArrayToPointer(env, handle), static_cast<ShBindingTable*>(byteArrayToPointer(env, bindingTable)));
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShExcludeAttributes
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShExcludeAttributes
   (JNIEnv* env, jclass self, jbyteArray handle, jintArray attributes, jint count){
 	JNI_METHOD_GUARD_ENTER
 	int* fetchedAttributes = (int*) (env)->GetIntArrayElements(attributes, nullptr);
@@ -397,7 +397,7 @@ JNIEXPORT jint JNICALL Java_Java_Main_ShExcludeAttributes
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jint JNICALL Java_Java_Main_ShGetUniformLocation
+JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_ShGetUniformLocation
   (JNIEnv* env, jclass self, jbyteArray handle, jstring name){
 	JNI_METHOD_GUARD_ENTER
 	char* nameRef = (char*) (env)->GetStringUTFChars(name, nullptr);
