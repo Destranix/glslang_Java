@@ -2,6 +2,9 @@
 Provides JNI-Bindings and other utilities based on glslang.
 https://github.com/KhronosGroup/glslang
 
+### Commit:
+1ef2e250fc36d862573cc5e92f04b1d0e2d89867
+
 ## Build
 ### Dependencies
 Same as glslang:
@@ -36,7 +39,7 @@ git clone https://github.com/Destranix/glslang_Java.git
 ```
 #### 3) Copy lib files
 
-Find glslang lib files in `$GLSLANG_BUILD_DIR`. They should lie under `$GLSLANG_BUILD_DIR/install` or `$GLSLANG_BUILD_DIR/$(pwd)/install`.
+Find glslang lib(.lib/.a/.so) files in `$GLSLANG_BUILD_DIR`. They should lie under `$GLSLANG_BUILD_DIR/install` or `$GLSLANG_BUILD_DIR/$(pwd)/install`.
 Copy them into `$SOURCE_DIR/C/lib`.
 
 #### 4) Execute make
