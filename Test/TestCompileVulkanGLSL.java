@@ -1,14 +1,28 @@
 package Test;
 
-import static Java.Main.*;
+import static Java.Main.FinalizeProcess;
+import static Java.Main.InitializeProcess;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.EnumSet;
 
-import Java.EShExecutable;
+import Java.EShClient;
 import Java.EShLanguage;
-import Java.EShOptimizationLevel;
+import Java.EShMessages;
+import Java.EShSource;
+import Java.EShTargetClientVersion;
+import Java.EShTargetLanguage;
+import Java.EShTargetLanguageVersion;
+import Java.Global;
+import Java.SpvBuildLogger;
+import Java.SpvOptions;
+import Java.TBuiltInResource;
+import Java.TLimits;
+import Java.TProgram;
+import Java.TShader;
 
-public class Test {
+public class TestCompileVulkanGLSL {
 	
 	public static final int[] defaultTBuiltInResourceValues = {
 			/* .MaxLights = */ 32,
@@ -143,46 +157,88 @@ public class Test {
 			"}";
 
 	public static void main(String[] args) throws IOException {
-		ShInitialize();
+		boolean callInitFuncts = true;
+		if(args != null &&  Arrays.asList(args).contains("-noCallInitFuncts")){
+			callInitFuncts = false;
+		}
+		if(callInitFuncts){
+			InitializeProcess();
+		}
 		
-		byte[] compilerVertex = ShConstructCompiler(EShLanguage.EShLangVertex, 0);
-		byte[] compilerFragment = ShConstructCompiler(EShLanguage.EShLangFragment, 0);
-		byte[] linker = ShConstructLinker(EShExecutable.EShExFragment, 0);
-		byte[] uniformMap = ShConstructUniformMap();
+		System.out.println("Essl version: "+Global.GetEsslVersionString());
+		System.out.println("Glsl version: "+Global.GetGlslVersionString());
 		
-		byte[] limits = TLimits(defaultTLimitsValues);
-		byte[] resource = TBuiltInResource(defaultTBuiltInResourceValues, limits);
+		TShader shaderVertex = new TShader(EShLanguage.EShLangVertex);
+		TShader shaderFragment = new TShader(EShLanguage.EShLangFragment);
 		
-		ShCompile(compilerVertex, new String[]{shaderStringVertex}, EShOptimizationLevel.EShOptNone, resource, 0, 450);
-		ShCompile(compilerFragment, new String[]{shaderStringFragment}, EShOptimizationLevel.EShOptNone, resource, 0, 450);
+		shaderVertex.setStrings(new String[]{shaderStringVertex});
+		shaderFragment.setStrings(new String[]{shaderStringFragment});
 		
-		free(resource);
-		free(limits);
+		shaderVertex.setEnvInput(EShSource.EShSourceGlsl, EShLanguage.EShLangVertex, EShClient.EShClientVulkan, 450);
+		shaderFragment.setEnvInput(EShSource.EShSourceGlsl, EShLanguage.EShLangFragment, EShClient.EShClientVulkan, 450);
 		
-		byte[] compilerArr = createArray(new byte[][]{compilerVertex, compilerFragment});
+		shaderVertex.setEnvClient(EShClient.EShClientVulkan, EShTargetClientVersion.EShTargetVulkan_1_1);
+		shaderFragment.setEnvClient(EShClient.EShClientVulkan, EShTargetClientVersion.EShTargetVulkan_1_1);
 		
-		ShLinkExt(linker, compilerArr, 2);
-				
-		free(compilerArr);
+		shaderVertex.setEnvTarget(EShTargetLanguage.EShTargetSpv, EShTargetLanguageVersion.EShTargetSpv_1_3);
+		shaderFragment.setEnvTarget(EShTargetLanguage.EShTargetSpv, EShTargetLanguageVersion.EShTargetSpv_1_3);
 		
-		byte[] executable = ShGetExecutable(linker);
+		TLimits limits = new TLimits(defaultTLimitsValues);
 		
-		System.out.println("InfoLogs:");
-		System.out.println("compilerVertex:");
-		System.out.println(ShGetInfoLog(compilerVertex));
-		System.out.println("compilerFragment:");
-		System.out.println(ShGetInfoLog(compilerFragment));
-		System.out.println("linker:");
-		System.out.println(ShGetInfoLog(linker));
-		System.out.println("uniformMap:");
-		System.out.println(ShGetInfoLog(uniformMap));
+		TBuiltInResource resources = new TBuiltInResource(defaultTBuiltInResourceValues, limits);
 		
-		ShDestruct(uniformMap);
-		ShDestruct(linker);
-		ShDestruct(compilerFragment);
-		ShDestruct(compilerVertex);
+		if(!shaderVertex.parse(resources, 450, true, EnumSet.of(EShMessages.EShMsgDefault))) {throw new AssertionError("Could not parse vertex shader!\r\n"+"Vertex Debuglog:\r\n"+shaderVertex.getInfoLog());};
 		
-		ShFinalize();
+		System.out.println("Vertex Infolog:\r\n"+shaderVertex.getInfoLog());
+		
+		if(!shaderFragment.parse(resources, 450, true, EnumSet.of(EShMessages.EShMsgDefault))) {throw new AssertionError("Could not parse fragment shader!\r\n"+"Fragment Debuglog:\r\n"+shaderFragment.getInfoLog());};
+		
+		System.out.println("Fragment Infolog:\r\n"+shaderFragment.getInfoLog());
+		
+		TProgram program = new TProgram();
+		
+		program.addShader(shaderVertex);
+		program.addShader(shaderFragment);
+		
+		if(!program.link(EnumSet.of(EShMessages.EShMsgDefault))) {throw new AssertionError("Could not link program!\r\n"+"Program Debuglog:\r\n"+program.getInfoLog());};
+		
+		System.out.println("Program Infolog:\r\n"+program.getInfoLog());
+		
+		long[][] spirv = new long[1][];
+		SpvBuildLogger logger = new SpvBuildLogger();
+		SpvOptions options = new SpvOptions();
+		options.setGenerateDebugInfo(true);
+		
+		Global.GlslangToSpv(program.getIntermediate(EShLanguage.EShLangVertex), spirv, logger, options);
+		System.out.println(logger.getAllMessages());
+		Global.OutputSpvBin(spirv[0], "vert.spv");
+		System.out.println("Disassambled vert.spv:");
+		Global.SpirvToolsDisassemble(System.out, spirv[0]);
+		
+		Global.GlslangToSpv(program.getIntermediate(EShLanguage.EShLangFragment), spirv, logger, options);
+		System.out.println(logger.getAllMessages());
+		Global.OutputSpvBin(spirv[0], "frag.spv");
+		System.out.println("Disassambled frag.spv:");
+		Global.SpirvToolsDisassemble(System.out, spirv[0]);
+		
+		
+		logger.free();
+		options.free();
+		
+		program.free();
+		
+		shaderVertex.free();
+		shaderFragment.free();
+		
+		resources.free();
+		limits.free();
+		
+		if(callInitFuncts){
+			FinalizeProcess();
+		}
+		
+		
+		System.out.println("Test succeeded!");
 	}
-
+	
 }

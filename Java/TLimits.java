@@ -1,43 +1,70 @@
 package Java;
 
-public class TLimits {
-	
-	private byte[] ptr;
-	
+public class TLimits extends PointerBoundObject {
+
 	private boolean[] values;
-	
-	public TLimits(){
-		this(new Values());
+	private final int constructorIndex;
+
+	public TLimits() {
+		this.values = null;
+		this.constructorIndex = 0;
+		load();
 	}
-	
-	public TLimits(Values values){
+
+	public TLimits(Values values) {
 		this.values = values.asBooleanArray();
+		this.constructorIndex = 1;
 		load();
 	}
-	
-	public TLimits(boolean[] values){
+
+	public TLimits(boolean[] values) {
 		this.values = values;
+		this.constructorIndex = 1;
 		load();
 	}
-	
-	public void load(){
-		if(ptr == null){
-			ptr = Main.TLimits(values);
+
+	protected TLimits(byte[] ptr) {
+		this.ptr = ptr;
+		this.values = null;
+		this.constructorIndex = -1;
+	}
+
+	@Override
+	protected void load_intern() {
+		if (ptr == null) {
+			switch (constructorIndex) {
+				case -1:
+					throw new IllegalStateException(EXCEPTION_MSG_NOT_LOADABLE);
+				case 0:
+					ptr = Main.TLimits();
+					break;
+				case 1:
+					ptr = Main.TLimits(values);
+					break;
+				default:
+					throw new AssertionError("Reached unreachable state!");
+			}
 		}
 	}
-	
-	public void free(){
-		if(ptr != null){
-			Main.free(ptr);
-			ptr = null;
+
+	@Override
+	protected void free_intern() {
+		if (ptr != null) {
+			switch (constructorIndex) {
+				case -1:
+					throw new IllegalStateException(EXCEPTION_MSG_NOT_FREEABLE);
+				case 0:
+				case 1:
+					Main.delete(ptr);
+					ptr = null;
+					break;
+				default:
+					throw new AssertionError("Reached unreachable state!");
+			}
 		}
 	}
-	
-	protected byte[] getPtr(){
-		return ptr;
-	}
-	
-	public static class Values{
+
+	public static class Values {
 		public boolean nonInductiveForLoops = true;
 		public boolean whileLoops = true;
 		public boolean doWhileLoops = true;
@@ -47,8 +74,8 @@ public class TLimits {
 		public boolean generalSamplerIndexing = true;
 		public boolean generalVariableIndexing = true;
 		public boolean generalConstantMatrixVectorIndexing = true;
-		
-		public boolean[] asBooleanArray(){
+
+		public boolean[] asBooleanArray() {
 			boolean[] ret = new boolean[9];
 			int i = 0;
 			ret[i++] = nonInductiveForLoops;
@@ -60,7 +87,7 @@ public class TLimits {
 			ret[i++] = generalSamplerIndexing;
 			ret[i++] = generalVariableIndexing;
 			ret[i++] = generalConstantMatrixVectorIndexing;
-			
+
 			return ret;
 		}
 	}

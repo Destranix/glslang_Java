@@ -1,35 +1,55 @@
 package Java;
 
-public class UniformMap {
-	
-	private byte[] ptr;
-	
-	public UniformMap(){
+public class UniformMap extends PointerBoundObject {
+
+	private final int constructorIndex;
+
+	public UniformMap() {
+		this.constructorIndex = 0;
 		load();
 	}
-	
-	public void load(){
-		if(ptr == null){
-			ptr = Main.ShConstructUniformMap();
+
+	protected UniformMap(byte[] ptr) {
+		this.ptr = ptr;
+		this.constructorIndex = -1;
+	}
+
+	@Override
+	protected void load_intern() {
+		if (ptr == null) {
+			switch (constructorIndex) {
+				case -1:
+					throw new IllegalStateException(EXCEPTION_MSG_NOT_LOADABLE);
+				case 0:
+					ptr = Main.ShConstructUniformMap();
+					break;
+				default:
+					throw new AssertionError("Reached unreachable state!");
+			}
 		}
 	}
-	
-	public void free(){
-		if(ptr != null){
-			Main.ShDestruct(ptr);
-			ptr = null;
+
+	@Override
+	protected void free_intern() {
+		if (ptr != null) {
+			switch (constructorIndex) {
+				case -1:
+					throw new IllegalStateException(EXCEPTION_MSG_NOT_FREEABLE);
+				case 0:
+					Main.ShDestruct(ptr);
+					ptr = null;
+					break;
+				default:
+					throw new AssertionError("Reached unreachable state!");
+			}
 		}
 	}
-	
-	protected byte[] getPtr(){
-		return ptr;
-	}
-	
-	public String getInfoLog(){
+
+	public String getInfoLog() {
 		return Main.ShGetInfoLog(ptr);
 	}
-	
-	public int getUniformLocation(String name){
+
+	public int getUniformLocation(String name) {
 		return Main.ShGetUniformLocation(ptr, name);
 	}
 }
