@@ -53,7 +53,7 @@ if [ $generate_classes -eq 1 ]
 then
 	mkdir -p jarTmp/C
 	mkdir -p jarTmp/C/lib
-	find "./C" -mindepth 1 -maxdepth 1 \( -name "*.dll" -o -name "*.so" \) -exec cp {} "./jarTmp/C" \;
+	find "./C" -mindepth 1 -maxdepth 1 \( -name "*.dll" -o -name "*.so" \) -exec cp -l {} "./jarTmp/C" \;
 	find "./C/lib" -mindepth 1 -maxdepth 1  -name "*.so" -exec cp -l {} "./jarTmp/C/lib" \;
 fi
 
