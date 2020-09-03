@@ -17,7 +17,7 @@ Same as glslang:
 * [googletest][googletest]: _optional_, but should use if making any changes to glslang.
 
 Additional Notes:
-* On Windows currently Visual Studio Build Tools are needed. `vcvarsall.bat`must be visible in shell opened by make. Git Bash or simmiliar might fail on execution. Consider using cmd for calling make in that case.
+* On Windows currently Visual Studio Build Tools are needed. `vcvarsall.bat`must be visible in shell opened by make. Git Bash or similar might fail on execution. Consider using cmd for calling make in that case.
 
 ### Build steps
 
