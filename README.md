@@ -55,6 +55,16 @@ Result should be a dynamic library suitable for your system.
 
 ## Using JNI
 
+### Build jars
+The script `packJar` cann be used to generate Jars packing all necessary classes and native libraries. Simply execute the script in `$SOURCE_DIR`.
+The following command-line options are available:
+* `-f=[DIR]`: Allows to specify the outputfile containing the classes and native libraries. `DIR`is either an absolute path or relative to current working directory.
+* `-s=[DIR]`: Allows to specify the outputfile containing the sources. `DIR`is either an absolute path or relative to current working directory.
+* `-no-generate-classes`: Causes script not to generate a .jar containing classes and native libraries.
+* `-no-generate-sources`: Causes script not to generate a .jar containing sources.
+* `-no-cleanup`: Causes script not to cleanup generated folders and files.
+
+### Other
 To make use of JNI-Bindings, you'll have to add the path of the generated dynamic library to `java.library.path`.
 There are several ways to do that. One is, by extending `java.library.path`on java execution.
 i.e.:
