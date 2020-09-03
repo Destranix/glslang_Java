@@ -1,0 +1,74 @@
+#!/bin/bash
+
+output_file="glslang.jar"
+output_file_src="glslang-sources.jar"
+cleanup=1
+generate_sources=1
+generate_classes=1
+
+#Parse command line options
+for val in "$@"
+do
+	sep='='
+	case $val in
+	  (*"$sep"*)
+	    opt=${val%%"$sep"*}
+	    optarg=${val#*"$sep"}
+	    ;;
+	  (*)
+	    opt=$val
+	    optarg=
+	    ;;
+	esac
+    case "$opt" in
+    -f)  output_file=$optarg
+        ;;
+    -s)  output_file_src=$optarg
+    	;;
+    -no-cleanup)	cleanup=0
+    	;;
+    -no-generate-sources)	generate_sources=0
+    	;;
+    -no-generate-classes)	generate_classes=0
+    	;;
+    esac
+done
+
+#Compile java files
+mkdir -p ./jarTmp
+mkdir -p ./jarTmp/src
+if [ $generate_classes -eq 1 ]
+then
+	javac -cp "./com/destranix/glslang:./cz/adamh/utils" -d ./jarTmp -source 13 -Werror ./com/destranix/glslang/*.java ./cz/adamh/utils/*.java
+fi
+
+#Copy sources
+mkdir -p ./jarTmp/src/com/destranix/glslang/
+mkdir -p ./jarTmp/src/cz/adamh/utils
+cp -l ./com/destranix/glslang/*.java ./jarTmp/src/com/destranix/glslang/
+cp -l ./cz/adamh/utils/*.java ./jarTmp/src/cz/adamh/utils
+
+#Copy libraries
+if [ $generate_classes -eq 1 ]
+then
+	mkdir -p jarTmp/C
+	mkdir -p jarTmp/C/lib
+	find "./C" -mindepth 1 -maxdepth 1 \( -name "*.dll" -o -name "*.so" \) -exec cp {} "./jarTmp/C" \;
+	find "./C/lib" -mindepth 1 -maxdepth 1  -name "*.so" -exec cp -l {} "./jarTmp/C/lib" \;
+fi
+
+#Pack jar
+if [ $generate_classes -eq 1 ]
+then
+	jar -c -f $output_file -C ./jarTmp C -C ./jarTmp com -C ./jarTmp cz
+fi
+if [ $generate_sources -eq 1 ]
+then
+	jar -c -f $output_file_src -C ./jarTmp/src com -C ./jarTmp/src cz
+fi
+
+#Cleanup generated data
+if [ $cleanup -eq 1 ]
+then
+	rm -rf ./jarTmp
+fi
