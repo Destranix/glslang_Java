@@ -35,6 +35,14 @@ public enum EShLanguageMask {
 		}
 		return ret;
 	}
+	
+	public static EnumSet<EShLanguageMask> intToSet(int i) {
+		EnumSet<EShLanguageMask> ret = EnumSet.allOf(EShLanguageMask.class);
+		ret.removeIf((v)->{
+			return (i & v.getConstant()) == 0;
+		});
+		return ret;
+	}
 
 	public static EShLanguageMask valueByStr(String str) {
 		switch (str) {

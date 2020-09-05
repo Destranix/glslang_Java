@@ -161,8 +161,8 @@ public class TObjectReflection extends PointerBoundObject {
 		return Main.TObjectReflection_getTopLevelArrayStride(ptr);
 	}
 
-	public int getStages() {
-		return Main.TObjectReflection_getStages(ptr);
+	public EnumSet<EShLanguageMask> getStages() {
+		return EShLanguageMask.intToSet((Main.TObjectReflection_getStages(ptr)));
 	}
 
 	public static TObjectReflection badReflection() {
