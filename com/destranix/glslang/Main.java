@@ -124,6 +124,24 @@ public class Main {
 	public static final int EBT_VOID = 0;
 	public static final int EBT_FLOAT = 1;
 	public static final int EBT_DOUBLE = 2;
+	public static final int EBT_FLOAT_16 = 3;
+	public static final int EBT_INT8 = 4;
+	public static final int EBT_UINT8 = 5;
+	public static final int EBT_INT16 = 6;
+	public static final int EBT_UINT16 = 7;
+	public static final int EBT_INT = 8;
+	public static final int EBT_UINT = 9;
+	public static final int EBT_INT64 = 10;
+	public static final int EBT_UINT64 = 11;
+	public static final int EBT_BOOL = 12;
+	public static final int EBT_ATOMIC_UINT = 13;
+	public static final int EBT_SAMPLER = 14;
+	public static final int EBT_STRUCT = 15;
+	public static final int EBT_BLOCK = 16;
+	public static final int EBT_ACC_STRUCT = 17;
+	public static final int EBT_REFERENCE = 18;
+	public static final int EBT_RAY_QUERY = 19;
+	public static final int EBT_STRING = 20;
 
 	public static final int EPQ_NONE = 0;
 	public static final int EPQ_LOW = 1;
