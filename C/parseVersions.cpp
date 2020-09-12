@@ -373,7 +373,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseVersions_1error
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseVersions*>(env _$ ptr)->error(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -386,7 +386,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseVersions_1warn
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseVersions*>(env _$ ptr)->warn(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -399,7 +399,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseVersions_1ppError
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseVersions*>(env _$ ptr)->ppError(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -412,7 +412,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseVersions_1ppWarn
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseVersions*>(env _$ ptr)->ppWarn(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 

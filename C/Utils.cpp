@@ -361,7 +361,7 @@ glslang::TString* toTString(JNIEnv* env, jstring s, int length){
 	sRefCpy = strncpy(sRefCpy, sRef, length);
 	glslang::TString* ret = glslang::NewPoolTString(sRefCpy);
 	(env)->ReleaseStringUTFChars(s, sRef);
-	delete sRefCpy;
+	delete[] sRefCpy;
 	return ret;
 }
 

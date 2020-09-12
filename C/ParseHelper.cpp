@@ -69,7 +69,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseContextBase_1error
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseContextBase*>(env _$ ptr)->error(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -82,7 +82,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseContextBase_1warn
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseContextBase*>(env _$ ptr)->warn(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -95,7 +95,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseContextBase_1ppErro
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseContextBase*>(env _$ ptr)->ppError(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -108,7 +108,7 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseContextBase_1ppWarn
 		additionalArr[i] = env _$ (jbyteArray) (env)->GetObjectArrayElement(additional, i);
 	}
 	$<TParseContextBase*>(env _$ ptr)->ppWarn(*$<TSourceLoc*>(env _$ loc), toChars(env, szReason), toChars(env, szToken), toChars(env, szExtraInfoFormat), additionalArr);
-	delete additionalArr;
+	delete[] additionalArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -512,7 +512,7 @@ JNIEXPORT jintArray JNICALL Java_com_destranix_glslang_Main_TParseContextBase_1g
 	copy(list.begin(),list.end(),a);
 	jintArray ret = env->NewIntArray(list.size());
 	env->SetIntArrayRegion(ret, 0, list.size(), a);
-	delete a;
+	delete[] a;
 	return ret;
 	JNI_METHOD_GUARD_LEAVE
 }

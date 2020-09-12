@@ -245,7 +245,7 @@ template<typename T> inline T* Pool_callocRegister(T* type, const void* key, siz
 	if(key != nullptr){
 		allocationPool.insert(std::make_pair(key, (new std::set<std::function<void()>*>())));
 		allocationPool.find(key)->second->insert(new std::function<void()>([ret](){
-			delete ret;
+			delete[] ret;
 		}));
 	}
 	return ret;
@@ -271,7 +271,7 @@ template<typename T> inline T* Pool_calloc(T* type, size_t count){
 	T* ret = new T[count];
 	allocationPool.insert(std::make_pair($<void*>(ret), (new std::set<std::function<void()>*>())));
 	allocationPool.find($<void*>(ret))->second->insert(new std::function<void()>([ret](){
-		delete ret;
+		delete[] ret;
 	}));
 	return ret;
 }
