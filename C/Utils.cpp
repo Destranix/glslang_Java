@@ -408,6 +408,17 @@ const char** toCharArrays(JNIEnv* env, jobjectArray s, int* l, void* ref){
 	return ret;
 }
 
+std::vector<const char*>* toCharsVector(JNIEnv* env, jobjectArray s, void* ref){
+	jsize numStrings = (env)->GetArrayLength(s);
+	std::vector<const char*>* ret = nullptr;
+	ret = Pool_mallocRegister(ret, ref);
+	for(unsigned int i=0;i<(unsigned int)(int) numStrings;++i){
+		jobject fetchedString = (env)->GetObjectArrayElement(s, i);
+		ret->push_back(toChars(env, $<jstring>(fetchedString)));
+	}
+	return ret;
+}
+
 std::vector<std::string>* toCStringVector(JNIEnv* env, jobjectArray s, void* ref){
 	jsize numStrings = (env)->GetArrayLength(s);
 	std::vector<std::string>* ret = nullptr;

@@ -14,7 +14,7 @@ using namespace glslang;
 JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TLiveTraverser
   (JNIEnv* env, jclass self, jbyteArray i, jboolean traverseAll , jboolean preVisit, jboolean inVisit, jboolean postVisit){
 	JNI_METHOD_GUARD_ENTER
-	return env $_ Pool_malloc($<TLiveTraverser*>(nullptr), *$<TIntermediate*>(env _$ i), traverseAll, preVisit, inVisit, postVisit);
+	return env $_ Pool_mallocIndirect($<TLiveTraverser*>(nullptr), $<TIntermediate*>(env _$ i), &traverseAll, &preVisit, &inVisit, &postVisit);
 	JNI_METHOD_GUARD_LEAVE
 }
 

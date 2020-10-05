@@ -207,6 +207,42 @@ extern "C" {
 #define com_destranix_glslang_Main_EBT_FLOAT 1L
 #undef com_destranix_glslang_Main_EBT_DOUBLE
 #define com_destranix_glslang_Main_EBT_DOUBLE 2L
+#undef com_destranix_glslang_Main_EBT_FLOAT_16
+#define com_destranix_glslang_Main_EBT_FLOAT_16 3L
+#undef com_destranix_glslang_Main_EBT_INT8
+#define com_destranix_glslang_Main_EBT_INT8 4L
+#undef com_destranix_glslang_Main_EBT_UINT8
+#define com_destranix_glslang_Main_EBT_UINT8 5L
+#undef com_destranix_glslang_Main_EBT_INT16
+#define com_destranix_glslang_Main_EBT_INT16 6L
+#undef com_destranix_glslang_Main_EBT_UINT16
+#define com_destranix_glslang_Main_EBT_UINT16 7L
+#undef com_destranix_glslang_Main_EBT_INT
+#define com_destranix_glslang_Main_EBT_INT 8L
+#undef com_destranix_glslang_Main_EBT_UINT
+#define com_destranix_glslang_Main_EBT_UINT 9L
+#undef com_destranix_glslang_Main_EBT_INT64
+#define com_destranix_glslang_Main_EBT_INT64 10L
+#undef com_destranix_glslang_Main_EBT_UINT64
+#define com_destranix_glslang_Main_EBT_UINT64 11L
+#undef com_destranix_glslang_Main_EBT_BOOL
+#define com_destranix_glslang_Main_EBT_BOOL 12L
+#undef com_destranix_glslang_Main_EBT_ATOMIC_UINT
+#define com_destranix_glslang_Main_EBT_ATOMIC_UINT 13L
+#undef com_destranix_glslang_Main_EBT_SAMPLER
+#define com_destranix_glslang_Main_EBT_SAMPLER 14L
+#undef com_destranix_glslang_Main_EBT_STRUCT
+#define com_destranix_glslang_Main_EBT_STRUCT 15L
+#undef com_destranix_glslang_Main_EBT_BLOCK
+#define com_destranix_glslang_Main_EBT_BLOCK 16L
+#undef com_destranix_glslang_Main_EBT_ACC_STRUCT
+#define com_destranix_glslang_Main_EBT_ACC_STRUCT 17L
+#undef com_destranix_glslang_Main_EBT_REFERENCE
+#define com_destranix_glslang_Main_EBT_REFERENCE 18L
+#undef com_destranix_glslang_Main_EBT_RAY_QUERY
+#define com_destranix_glslang_Main_EBT_RAY_QUERY 19L
+#undef com_destranix_glslang_Main_EBT_STRING
+#define com_destranix_glslang_Main_EBT_STRING 20L
 #undef com_destranix_glslang_Main_EPQ_NONE
 #define com_destranix_glslang_Main_EPQ_NONE 0L
 #undef com_destranix_glslang_Main_EPQ_LOW
@@ -3261,68 +3297,70 @@ extern "C" {
 #define com_destranix_glslang_Main_OPERAND_LITERAL_NUMBER 8L
 #undef com_destranix_glslang_Main_OPERAND_LITERAL_STRING
 #define com_destranix_glslang_Main_OPERAND_LITERAL_STRING 9L
+#undef com_destranix_glslang_Main_OPERAND_VARIABLE_LITERAL_STRINGS
+#define com_destranix_glslang_Main_OPERAND_VARIABLE_LITERAL_STRINGS 10L
 #undef com_destranix_glslang_Main_OPERAND_SOURCE
-#define com_destranix_glslang_Main_OPERAND_SOURCE 10L
+#define com_destranix_glslang_Main_OPERAND_SOURCE 11L
 #undef com_destranix_glslang_Main_OPERAND_EXECUTION_MODEL
-#define com_destranix_glslang_Main_OPERAND_EXECUTION_MODEL 11L
+#define com_destranix_glslang_Main_OPERAND_EXECUTION_MODEL 12L
 #undef com_destranix_glslang_Main_OPERAND_ADDRESSING
-#define com_destranix_glslang_Main_OPERAND_ADDRESSING 12L
+#define com_destranix_glslang_Main_OPERAND_ADDRESSING 13L
 #undef com_destranix_glslang_Main_OPERAND_MEMORY
-#define com_destranix_glslang_Main_OPERAND_MEMORY 13L
+#define com_destranix_glslang_Main_OPERAND_MEMORY 14L
 #undef com_destranix_glslang_Main_OPERAND_EXECUTION_MODE
-#define com_destranix_glslang_Main_OPERAND_EXECUTION_MODE 14L
+#define com_destranix_glslang_Main_OPERAND_EXECUTION_MODE 15L
 #undef com_destranix_glslang_Main_OPERAND_STORAGE
-#define com_destranix_glslang_Main_OPERAND_STORAGE 15L
+#define com_destranix_glslang_Main_OPERAND_STORAGE 16L
 #undef com_destranix_glslang_Main_OPERAND_DIMENSIONALITY
-#define com_destranix_glslang_Main_OPERAND_DIMENSIONALITY 16L
+#define com_destranix_glslang_Main_OPERAND_DIMENSIONALITY 17L
 #undef com_destranix_glslang_Main_OPERAND_SAMPLER_ADDRESSING_MODE
-#define com_destranix_glslang_Main_OPERAND_SAMPLER_ADDRESSING_MODE 17L
+#define com_destranix_glslang_Main_OPERAND_SAMPLER_ADDRESSING_MODE 18L
 #undef com_destranix_glslang_Main_OPERAND_SAMPLER_FILTER_MODE
-#define com_destranix_glslang_Main_OPERAND_SAMPLER_FILTER_MODE 18L
+#define com_destranix_glslang_Main_OPERAND_SAMPLER_FILTER_MODE 19L
 #undef com_destranix_glslang_Main_OPERAND_SAMPLER_IMAGE_FORMAT
-#define com_destranix_glslang_Main_OPERAND_SAMPLER_IMAGE_FORMAT 19L
+#define com_destranix_glslang_Main_OPERAND_SAMPLER_IMAGE_FORMAT 20L
 #undef com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_ORDER
-#define com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_ORDER 20L
+#define com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_ORDER 21L
 #undef com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_DATA_TYPE
-#define com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_DATA_TYPE 21L
+#define com_destranix_glslang_Main_OPERAND_IMAGE_CHANNEL_DATA_TYPE 22L
 #undef com_destranix_glslang_Main_OPERAND_IMAGE_OPERANDS
-#define com_destranix_glslang_Main_OPERAND_IMAGE_OPERANDS 22L
+#define com_destranix_glslang_Main_OPERAND_IMAGE_OPERANDS 23L
 #undef com_destranix_glslang_Main_OPERAND_FP_FAST_MATH
-#define com_destranix_glslang_Main_OPERAND_FP_FAST_MATH 23L
+#define com_destranix_glslang_Main_OPERAND_FP_FAST_MATH 24L
 #undef com_destranix_glslang_Main_OPERAND_FP_ROUNDING_MODE
-#define com_destranix_glslang_Main_OPERAND_FP_ROUNDING_MODE 24L
+#define com_destranix_glslang_Main_OPERAND_FP_ROUNDING_MODE 25L
 #undef com_destranix_glslang_Main_OPERAND_LINKAGE_TYPE
-#define com_destranix_glslang_Main_OPERAND_LINKAGE_TYPE 25L
+#define com_destranix_glslang_Main_OPERAND_LINKAGE_TYPE 26L
 #undef com_destranix_glslang_Main_OPERAND_ACCESS_QUALIFIER
-#define com_destranix_glslang_Main_OPERAND_ACCESS_QUALIFIER 26L
+#define com_destranix_glslang_Main_OPERAND_ACCESS_QUALIFIER 27L
 #undef com_destranix_glslang_Main_OPERAND_FUNC_PARAM_ATTR
-#define com_destranix_glslang_Main_OPERAND_FUNC_PARAM_ATTR 27L
+#define com_destranix_glslang_Main_OPERAND_FUNC_PARAM_ATTR 28L
 #undef com_destranix_glslang_Main_OPERAND_DECORATION
-#define com_destranix_glslang_Main_OPERAND_DECORATION 28L
+#define com_destranix_glslang_Main_OPERAND_DECORATION 29L
 #undef com_destranix_glslang_Main_OPERAND_BUILT_IN
-#define com_destranix_glslang_Main_OPERAND_BUILT_IN 29L
+#define com_destranix_glslang_Main_OPERAND_BUILT_IN 30L
 #undef com_destranix_glslang_Main_OPERAND_SELECT
-#define com_destranix_glslang_Main_OPERAND_SELECT 30L
+#define com_destranix_glslang_Main_OPERAND_SELECT 31L
 #undef com_destranix_glslang_Main_OPERAND_LOOP
-#define com_destranix_glslang_Main_OPERAND_LOOP 31L
+#define com_destranix_glslang_Main_OPERAND_LOOP 32L
 #undef com_destranix_glslang_Main_OPERAND_FUNCTION
-#define com_destranix_glslang_Main_OPERAND_FUNCTION 32L
+#define com_destranix_glslang_Main_OPERAND_FUNCTION 33L
 #undef com_destranix_glslang_Main_OPERAND_MEMORY_SEMANTICS
-#define com_destranix_glslang_Main_OPERAND_MEMORY_SEMANTICS 33L
+#define com_destranix_glslang_Main_OPERAND_MEMORY_SEMANTICS 34L
 #undef com_destranix_glslang_Main_OPERAND_MEMORY_ACCESS
-#define com_destranix_glslang_Main_OPERAND_MEMORY_ACCESS 34L
+#define com_destranix_glslang_Main_OPERAND_MEMORY_ACCESS 35L
 #undef com_destranix_glslang_Main_OPERAND_SCOPE
-#define com_destranix_glslang_Main_OPERAND_SCOPE 35L
+#define com_destranix_glslang_Main_OPERAND_SCOPE 36L
 #undef com_destranix_glslang_Main_OPERAND_GROUP_OPERATION
-#define com_destranix_glslang_Main_OPERAND_GROUP_OPERATION 36L
+#define com_destranix_glslang_Main_OPERAND_GROUP_OPERATION 37L
 #undef com_destranix_glslang_Main_OPERAND_KERNEL_ENQUEUE_FLAGS
-#define com_destranix_glslang_Main_OPERAND_KERNEL_ENQUEUE_FLAGS 37L
+#define com_destranix_glslang_Main_OPERAND_KERNEL_ENQUEUE_FLAGS 38L
 #undef com_destranix_glslang_Main_OPERAND_KERNEL_PROFILING_INFO
-#define com_destranix_glslang_Main_OPERAND_KERNEL_PROFILING_INFO 38L
+#define com_destranix_glslang_Main_OPERAND_KERNEL_PROFILING_INFO 39L
 #undef com_destranix_glslang_Main_OPERAND_CAPABILITY
-#define com_destranix_glslang_Main_OPERAND_CAPABILITY 39L
+#define com_destranix_glslang_Main_OPERAND_CAPABILITY 40L
 #undef com_destranix_glslang_Main_OPERAND_OPCODE
-#define com_destranix_glslang_Main_OPERAND_OPCODE 40L
+#define com_destranix_glslang_Main_OPERAND_OPCODE 41L
 #undef com_destranix_glslang_Main_SHADER_BALLOT_BAD_AMD
 #define com_destranix_glslang_Main_SHADER_BALLOT_BAD_AMD 0L
 #undef com_destranix_glslang_Main_SWIZZLE_INVOCATIONS_AMD
@@ -9505,14 +9543,6 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addRequest
 
 /*
  * Class:     com_destranix_glslang_Main
- * Method:    TIntermediate_updateRequestedExtension
- * Signature: ([BLjava/lang/String;I)V
- */
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1updateRequestedExtension
-  (JNIEnv *, jclass, jbyteArray, jstring, jint);
-
-/*
- * Class:     com_destranix_glslang_Main
  * Method:    TIntermediate_getRequestedExtensions
  * Signature: ([B)[B
  */
@@ -9705,10 +9735,10 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addC
 
 /*
  * Class:     com_destranix_glslang_Main
- * Method:    TIntermediate_addConversion
+ * Method:    TIntermediate_addPairConversion
  * Signature: ([BI[B[B)[B
  */
-JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addConversion___3BI_3B_3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addPairConversion
   (JNIEnv *, jclass, jbyteArray, jint, jbyteArray, jbyteArray);
 
 /*
@@ -9724,7 +9754,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addU
  * Method:    TIntermediate_addConversion
  * Signature: ([BI[B)[B
  */
-JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addConversion___3BI_3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addConversion
   (JNIEnv *, jclass, jbyteArray, jint, jbyteArray);
 
 /*
@@ -11118,6 +11148,38 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addProcess
  */
 JNIEXPORT jobjectArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getProcesses
   (JNIEnv *, jclass, jbyteArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    TIntermediate_getArithemeticInt8Enabled
+ * Signature: ([B)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticInt8Enabled
+  (JNIEnv *, jclass, jbyteArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    TIntermediate_getArithemeticInt16Enabled
+ * Signature: ([B)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticInt16Enabled
+  (JNIEnv *, jclass, jbyteArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    TIntermediate_getArithemeticFloat16Enabled
+ * Signature: ([B)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticFloat16Enabled
+  (JNIEnv *, jclass, jbyteArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    TIntermediate_updateNumericFeature
+ * Signature: ([BIZ)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1updateNumericFeature
+  (JNIEnv *, jclass, jbyteArray, jint, jboolean);
 
 /*
  * Class:     com_destranix_glslang_Main
@@ -18649,6 +18711,14 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TParseContext_1addO
 
 /*
  * Class:     com_destranix_glslang_Main
+ * Method:    TParseContext_addAssign
+ * Signature: ([B[BI[B[B)[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TParseContext_1addAssign
+  (JNIEnv *, jclass, jbyteArray, jbyteArray, jint, jbyteArray, jbyteArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
  * Method:    TParseContext_builtInOpCheck
  * Signature: ([B[B[B[B)V
  */
@@ -26036,8 +26106,24 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Builder_1addEntryPo
  * Method:    Builder_addExecutionMode
  * Signature: ([B[BIIII)V
  */
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode___3B_3BIIII
   (JNIEnv *, jclass, jbyteArray, jbyteArray, jint, jint, jint, jint);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addExecutionMode
+ * Signature: ([B[BI[J)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode___3B_3BI_3J
+  (JNIEnv *, jclass, jbyteArray, jbyteArray, jint, jlongArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addExecutionModeId
+ * Signature: ([B[BI[J)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionModeId
+  (JNIEnv *, jclass, jbyteArray, jbyteArray, jint, jlongArray);
 
 /*
  * Class:     com_destranix_glslang_Main
@@ -26073,11 +26159,35 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___
 
 /*
  * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addDecoration
+ * Signature: ([BJI[J)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___3BJI_3J
+  (JNIEnv *, jclass, jbyteArray, jlong, jint, jlongArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addDecoration
+ * Signature: ([BJI[Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___3BJI_3Ljava_lang_String_2
+  (JNIEnv *, jclass, jbyteArray, jlong, jint, jobjectArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
  * Method:    Builder_addDecorationId
  * Signature: ([BJIJ)V
  */
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId___3BJIJ
   (JNIEnv *, jclass, jbyteArray, jlong, jint, jlong);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addDecorationId
+ * Signature: ([BJI[J)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId___3BJI_3J
+  (JNIEnv *, jclass, jbyteArray, jlong, jint, jlongArray);
 
 /*
  * Class:     com_destranix_glslang_Main
@@ -26094,6 +26204,22 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecorat
  */
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecoration___3BJJILjava_lang_String_2
   (JNIEnv *, jclass, jbyteArray, jlong, jlong, jint, jstring);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addMemberDecoration
+ * Signature: ([BJJI[J)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecoration___3BJJI_3J
+  (JNIEnv *, jclass, jbyteArray, jlong, jlong, jint, jlongArray);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    Builder_addMemberDecoration
+ * Signature: ([BJJI[Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecoration___3BJJI_3Ljava_lang_String_2
+  (JNIEnv *, jclass, jbyteArray, jlong, jlong, jint, jobjectArray);
 
 /*
  * Class:     com_destranix_glslang_Main
@@ -29022,6 +29148,14 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_HasResultAndType
  */
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_inReadableOrder
   (JNIEnv *, jclass, jbyteArray, jobject);
+
+/*
+ * Class:     com_destranix_glslang_Main
+ * Method:    InitializePoolIndex
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_InitializePoolIndex
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_destranix_glslang_Main

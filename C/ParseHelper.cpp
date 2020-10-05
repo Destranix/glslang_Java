@@ -867,6 +867,13 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TParseContext_1addO
 	JNI_METHOD_GUARD_LEAVE
 }
 
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TParseContext_1addAssign
+  (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray loc, jint op, jbyteArray left, jbyteArray right){
+	JNI_METHOD_GUARD_ENTER
+	return env $_ $<TParseContext*>(env _$ ptr)->addAssign(*$<TSourceLoc*>(env _$ loc), $<TOperator>(op), $<TIntermTyped*>(env _$ left), $<TIntermTyped*>(env _$ right));
+	JNI_METHOD_GUARD_LEAVE
+}
+
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TParseContext_1builtInOpCheck
 	(JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray loc, jbyteArray function, jbyteArray node){
 	JNI_METHOD_GUARD_ENTER

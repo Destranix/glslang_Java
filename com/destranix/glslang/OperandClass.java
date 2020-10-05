@@ -11,6 +11,7 @@ public enum OperandClass {
 	OperandVariableLiteralId(Main.OPERAND_VARIABLE_LITERAL_ID),
 	OperandLiteralNumber(Main.OPERAND_LITERAL_NUMBER),
 	OperandLiteralString(Main.OPERAND_LITERAL_STRING),
+	OperandVariableLiteralStrings(Main.OPERAND_VARIABLE_LITERAL_STRINGS),
 	OperandSource(Main.OPERAND_SOURCE),
 	OperandExecutionModel(Main.OPERAND_EXECUTION_MODEL),
 	OperandAddressing(Main.OPERAND_ADDRESSING),
@@ -75,6 +76,8 @@ public enum OperandClass {
 				return OperandLiteralNumber;
 			case "OperandLiteralString":
 				return OperandLiteralString;
+			case "OperandVariableLiteralStrings":
+				return OperandVariableLiteralStrings;
 			case "OperandSource":
 				return OperandSource;
 			case "OperandExecutionModel":
@@ -164,6 +167,8 @@ public enum OperandClass {
 				return OperandLiteralNumber;
 			case Main.OPERAND_LITERAL_STRING:
 				return OperandLiteralString;
+			case Main.OPERAND_VARIABLE_LITERAL_STRINGS:
+				return OperandVariableLiteralStrings;
 			case Main.OPERAND_SOURCE:
 				return OperandSource;
 			case Main.OPERAND_EXECUTION_MODEL:

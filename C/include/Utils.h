@@ -314,6 +314,7 @@ const char** toCharArrays(JNIEnv* env, jobjectArray s, void* ref);
 
 const char** toCharArrays(JNIEnv* env, jobjectArray s, int* l, void* ref);
 
+std::vector<const char*>* toCharsVector(JNIEnv* env, jobjectArray s, void* ref);
 std::vector<std::string>* toCStringVector(JNIEnv* env, jobjectArray s, void* ref);
 glslang::TVector<glslang::TString>* toTStringTVector(JNIEnv* env, jobjectArray s, void* ref);
 

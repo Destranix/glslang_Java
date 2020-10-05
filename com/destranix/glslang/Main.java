@@ -1699,37 +1699,38 @@ public class Main {
 	public static final int OPERAND_VARIABLE_LITERAL_ID = 7;
 	public static final int OPERAND_LITERAL_NUMBER = 8;
 	public static final int OPERAND_LITERAL_STRING = 9;
-	public static final int OPERAND_SOURCE = 10;
-	public static final int OPERAND_EXECUTION_MODEL = 11;
-	public static final int OPERAND_ADDRESSING = 12;
-	public static final int OPERAND_MEMORY = 13;
-	public static final int OPERAND_EXECUTION_MODE = 14;
-	public static final int OPERAND_STORAGE = 15;
-	public static final int OPERAND_DIMENSIONALITY = 16;
-	public static final int OPERAND_SAMPLER_ADDRESSING_MODE = 17;
-	public static final int OPERAND_SAMPLER_FILTER_MODE = 18;
-	public static final int OPERAND_SAMPLER_IMAGE_FORMAT = 19;
-	public static final int OPERAND_IMAGE_CHANNEL_ORDER = 20;
-	public static final int OPERAND_IMAGE_CHANNEL_DATA_TYPE = 21;
-	public static final int OPERAND_IMAGE_OPERANDS = 22;
-	public static final int OPERAND_FP_FAST_MATH = 23;
-	public static final int OPERAND_FP_ROUNDING_MODE = 24;
-	public static final int OPERAND_LINKAGE_TYPE = 25;
-	public static final int OPERAND_ACCESS_QUALIFIER = 26;
-	public static final int OPERAND_FUNC_PARAM_ATTR = 27;
-	public static final int OPERAND_DECORATION = 28;
-	public static final int OPERAND_BUILT_IN = 29;
-	public static final int OPERAND_SELECT = 30;
-	public static final int OPERAND_LOOP = 31;
-	public static final int OPERAND_FUNCTION = 32;
-	public static final int OPERAND_MEMORY_SEMANTICS = 33;
-	public static final int OPERAND_MEMORY_ACCESS = 34;
-	public static final int OPERAND_SCOPE = 35;
-	public static final int OPERAND_GROUP_OPERATION = 36;
-	public static final int OPERAND_KERNEL_ENQUEUE_FLAGS = 37;
-	public static final int OPERAND_KERNEL_PROFILING_INFO = 38;
-	public static final int OPERAND_CAPABILITY = 39;
-	public static final int OPERAND_OPCODE = 40;
+	public static final int OPERAND_VARIABLE_LITERAL_STRINGS = 10;
+	public static final int OPERAND_SOURCE = 11;
+	public static final int OPERAND_EXECUTION_MODEL = 12;
+	public static final int OPERAND_ADDRESSING = 13;
+	public static final int OPERAND_MEMORY = 14;
+	public static final int OPERAND_EXECUTION_MODE = 15;
+	public static final int OPERAND_STORAGE = 16;
+	public static final int OPERAND_DIMENSIONALITY = 17;
+	public static final int OPERAND_SAMPLER_ADDRESSING_MODE = 18;
+	public static final int OPERAND_SAMPLER_FILTER_MODE = 19;
+	public static final int OPERAND_SAMPLER_IMAGE_FORMAT = 20;
+	public static final int OPERAND_IMAGE_CHANNEL_ORDER = 21;
+	public static final int OPERAND_IMAGE_CHANNEL_DATA_TYPE = 22;
+	public static final int OPERAND_IMAGE_OPERANDS = 23;
+	public static final int OPERAND_FP_FAST_MATH = 24;
+	public static final int OPERAND_FP_ROUNDING_MODE = 25;
+	public static final int OPERAND_LINKAGE_TYPE = 26;
+	public static final int OPERAND_ACCESS_QUALIFIER = 27;
+	public static final int OPERAND_FUNC_PARAM_ATTR = 28;
+	public static final int OPERAND_DECORATION = 29;
+	public static final int OPERAND_BUILT_IN = 30;
+	public static final int OPERAND_SELECT = 31;
+	public static final int OPERAND_LOOP = 32;
+	public static final int OPERAND_FUNCTION = 33;
+	public static final int OPERAND_MEMORY_SEMANTICS = 34;
+	public static final int OPERAND_MEMORY_ACCESS = 35;
+	public static final int OPERAND_SCOPE = 36;
+	public static final int OPERAND_GROUP_OPERATION = 37;
+	public static final int OPERAND_KERNEL_ENQUEUE_FLAGS = 38;
+	public static final int OPERAND_KERNEL_PROFILING_INFO = 39;
+	public static final int OPERAND_CAPABILITY = 40;
+	public static final int OPERAND_OPCODE = 41;
 
 	public static final int SHADER_BALLOT_BAD_AMD = 0;
 	public static final int SWIZZLE_INVOCATIONS_AMD = 1;
@@ -4540,13 +4541,6 @@ public class Main {
 
 	public static native void TIntermediate_addRequestedExtension(byte[] ptr, String extension);
 
-	public static void TIntermediate_updateRequestedExtension(byte[] ptr, String extension,
-			TExtensionBehavior behavior) {
-		TIntermediate_updateRequestedExtension(ptr, extension, behavior.getConstant());
-	}
-
-	public static native void TIntermediate_updateRequestedExtension(byte[] ptr, String extension, int behavior);
-
 	public static native byte[] TIntermediate_getRequestedExtensions(byte[] ptr);
 
 	public static native void TIntermediate_setTreeRoot(byte[] ptr, byte[] r);
@@ -4607,11 +4601,11 @@ public class Main {
 
 	public static native byte[] TIntermediate_addConversionType(byte[] ptr, int op, byte[] node0, byte[] node1);
 
-	public static byte[] TIntermediate_addConversion(byte[] ptr, TOperator op, byte[] node0, byte[] node1) {
-		return TIntermediate_addConversion(ptr, op.getConstant(), node0, node1);
+	public static byte[] TIntermediate_addPairConversion(byte[] ptr, TOperator op, byte[] node0, byte[] node1) {
+		return TIntermediate_addPairConversion(ptr, op.getConstant(), node0, node1);
 	}
 
-	public static native byte[] TIntermediate_addConversion(byte[] ptr, int op, byte[] node0, byte[] node1);
+	public static native byte[] TIntermediate_addPairConversion(byte[] ptr, int op, byte[] node0, byte[] node1);
 
 	public static byte[] TIntermediate_addUniShapeConversion(byte[] ptr, TOperator op, byte[] t, byte[] node) {
 		return TIntermediate_addUniShapeConversion(ptr, op.getConstant(), t, node);
@@ -5321,6 +5315,18 @@ public class Main {
 	public static native void TIntermediate_addProcessArgument(byte[] ptr, String arg);
 
 	public static native String[] TIntermediate_getProcesses(byte[] ptr);
+	
+	public static native boolean TIntermediate_getArithemeticInt8Enabled(byte[] ptr);
+	
+	public static native boolean TIntermediate_getArithemeticInt16Enabled(byte[] ptr);
+	
+	public static native boolean TIntermediate_getArithemeticFloat16Enabled(byte[] ptr);
+	
+	public static void TIntermediate_updateNumericFeature(byte[] ptr, TNumericFeatures_feature f, boolean on){
+		TIntermediate_updateNumericFeature(ptr, f.getConstant(), on);
+	}
+	
+	public static native void TIntermediate_updateNumericFeature(byte[] ptr, int f, boolean on);
 
 	public static native byte[] TIntermediate_findLValueBase(byte[] node, boolean swizzleOkay);
 
@@ -7905,6 +7911,12 @@ public class Main {
 	public static native void TParseContext_addInputArgumentConversions(byte[] ptr, byte[] function, byte[] node);
 
 	public static native byte[] TParseContext_addOutputArgumentConversions(byte[] ptr, byte[] function, byte[] node);
+	
+	public static byte[] TParseContext_addAssign(byte[] ptr, byte[] loc, TOperator op, byte[] left, byte[] right){
+		return TParseContext_addAssign(ptr, loc, op.getConstant(), left, right);
+	}
+	
+	public static native byte[] TParseContext_addAssign(byte[] ptr, byte[] loc, int op, byte[] left, byte[] right);
 
 	public static native void TParseContext_builtInOpCheck(byte[] ptr, byte[] loc, byte[] function, byte[] node);
 
@@ -10643,6 +10655,18 @@ public class Main {
 
 	public static native void Builder_addExecutionMode(byte[] ptr, byte[] func, int mode, int value1, int value2,
 			int value3);
+	
+	public static void Builder_addExecutionMode(byte[] ptr, byte[] func, ExecutionMode mode, long[] literals) {
+		Builder_addExecutionMode(ptr, func, mode.getConstant(), literals);
+	}
+	
+	public static native void Builder_addExecutionMode(byte[] ptr, byte[] func, int mode, long[] literals);
+	
+	public static void Builder_addExecutionModeId(byte[] ptr, byte[] func, ExecutionMode mode, long[] operandIds) {
+		Builder_addExecutionModeId(ptr, func, mode.getConstant(), operandIds);
+	}
+	
+	public static native void Builder_addExecutionModeId(byte[] ptr, byte[] func, int mode, long[] operandIds);
 
 	public static native void Builder_addName(byte[] ptr, long id, String name);
 
@@ -10667,12 +10691,30 @@ public class Main {
 	}
 
 	public static native void Builder_addDecoration(byte[] ptr, long id, int decoration, String s);
+	
+	public static void Builder_addDecoration(byte[] ptr, long id, Decoration decoration, long[] literals) {
+		Builder_addDecoration(ptr, id, decoration.getConstant(), literals);
+	}
+	
+	public static native void Builder_addDecoration(byte[] ptr, long id, int decoration, long[] literals);
+	
+	public static void Builder_addDecoration(byte[] ptr, long id, Decoration decoration, String[] strings) {
+		Builder_addDecoration(ptr, id, decoration.getConstant(), strings);
+	}
+	
+	public static native void Builder_addDecoration(byte[] ptr, long id, int decoration, String[] strings);
 
 	public static void Builder_addDecorationId(byte[] ptr, long id, Decoration decoration, long idDecoration) {
 		Builder_addDecorationId(ptr, id, decoration.getConstant(), idDecoration);
 	}
 
 	public static native void Builder_addDecorationId(byte[] ptr, long id, int decoration, long idDecoration);
+	
+	public static void Builder_addDecorationId(byte[] ptr, long id, Decoration decoration, long[] operandIds) {
+		Builder_addDecorationId(ptr, id, decoration.getConstant(), operandIds);
+	}
+	
+	public static native void Builder_addDecorationId(byte[] ptr, long id, int decoration, long[] operandIds);
 
 	public static void Builder_addMemberDecoration(byte[] ptr, long id, long member, Decoration decoration) {
 		Builder_addMemberDecoration(ptr, id, member, decoration.getConstant(), -1);
@@ -10693,6 +10735,18 @@ public class Main {
 	}
 
 	public static native void Builder_addMemberDecoration(byte[] ptr, long id, long member, int decoration, String s);
+	
+	public static void Builder_addMemberDecoration(byte[] ptr, long id, long member, Decoration decoration, long[] literals) {
+		Builder_addMemberDecoration(ptr, id, member, decoration.getConstant(), literals);
+	}
+	
+	public static native void Builder_addMemberDecoration(byte[] ptr, long id, long member, int decoration, long[] literals);
+	
+	public static void Builder_addMemberDecoration(byte[] ptr, long id, long member, Decoration decoration, String[] strings) {
+		Builder_addMemberDecoration(ptr, id, member, decoration.getConstant(), strings);
+	}
+	
+	public static native void Builder_addMemberDecoration(byte[] ptr, long id, long member, int decoration, String[] strings);
 
 	public static native void Builder_setBuildPoint(byte[] ptr, byte[] bp);
 
@@ -11938,6 +11992,8 @@ public class Main {
 	}
 
 	public static native void inReadableOrder(byte[] root, Void_BytearrayIntBytearray callback);
+	
+	public static native boolean InitializePoolIndex();
 
 	public static native byte[] TString(String str);
 

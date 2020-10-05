@@ -104,14 +104,10 @@ public class TIntermediate extends PointerBoundObject {
 		Main.TIntermediate_addRequestedExtension(ptr, extension);
 	}
 
-	public void updateRequestedExtension(String extension, TExtensionBehavior behavior) {
-		Main.TIntermediate_updateRequestedExtension(ptr, extension, behavior);
-	}
-
-	public IntCMap<TString> getRequestedExtensions() {
+	public CSet<TString> getRequestedExtensions() {
 		@SuppressWarnings("unchecked") // Is checked
-		IntCMap<TString> tmp = (IntCMap<TString>) fromPtr(Main.TIntermediate_getRequestedExtensions(ptr),
-				IntCMap.class);
+		CSet<TString> tmp = (CSet<TString>) fromPtr(Main.TIntermediate_getRequestedExtensions(ptr),
+				CSet.class);
 		return tmp;
 	}
 
@@ -208,10 +204,10 @@ public class TIntermediate extends PointerBoundObject {
 				TIntermTyped.class);
 	}
 
-	public CPair<TIntermTyped, TIntermTyped> addConversion(TOperator op, TIntermTyped node0, TIntermTyped node1) {
+	public CPair<TIntermTyped, TIntermTyped> addPairConversion(TOperator op, TIntermTyped node0, TIntermTyped node1) {
 		@SuppressWarnings("unchecked") // Is checked
 		CPair<TIntermTyped, TIntermTyped> tmp = (CPair<TIntermTyped, TIntermTyped>) fromPtr(
-				Main.TIntermediate_addConversion(ptr, op, node0.getPtr(), node1.getPtr()), CPair.class);
+				Main.TIntermediate_addPairConversion(ptr, op, node0.getPtr(), node1.getPtr()), CPair.class);
 		return tmp;
 	}
 
@@ -1025,6 +1021,22 @@ public class TIntermediate extends PointerBoundObject {
 	public String[] getProcesses() {
 		return Main.TIntermediate_getProcesses(ptr);
 	}
+	
+	public boolean getArithemeticInt8Enabled(){
+    	return Main.TIntermediate_getArithemeticInt8Enabled(ptr);
+    }
+	
+	public boolean getArithemeticInt16Enabled(){
+		return Main.TIntermediate_getArithemeticInt16Enabled(ptr);
+    }
+	
+	public boolean getArithemeticFloat16Enabled(){
+		return Main.TIntermediate_getArithemeticFloat16Enabled(ptr);
+    }
+	
+	public void updateNumericFeature(TNumericFeatures_feature f, boolean on){
+		Main.TIntermediate_updateNumericFeature(ptr, f, on);
+    }
 
 	public static TIntermTyped findLValueBase(TIntermTyped node, boolean swizzleOkay) {
 		return fromPtr(Main.TIntermediate_findLValueBase(node.getPtr(), swizzleOkay), TIntermTyped.class);

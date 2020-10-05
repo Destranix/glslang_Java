@@ -319,6 +319,11 @@ public class TParseContext extends TParseContextBase {
 		return fromPtr(Main.TParseContext_addOutputArgumentConversions(ptr, function.getPtr(), node.getPtr()),
 				TIntermTyped.class);
 	}
+	
+	public TIntermTyped addAssign(TSourceLoc loc, TOperator op, TIntermTyped left, TIntermTyped right) {
+		return fromPtr(Main.TParseContext_addAssign(ptr, loc.getPtr(), op, left.getPtr(), right.getPtr()),
+				TIntermTyped.class);
+	}
 
 	public void builtInOpCheck(TSourceLoc loc, TFunction function, TIntermOperator node) {
 		Main.TParseContext_builtInOpCheck(ptr, loc.getPtr(), function.getPtr(), node.getPtr());

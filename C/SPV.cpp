@@ -946,10 +946,32 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Builder_1addEntryPo
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode___3B_3BIIII
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray func, jint mode, jint v1, jint v2, jint v3){
 	JNI_METHOD_GUARD_ENTER
 	$<Builder*>(env _$ ptr)->addExecutionMode($<Function*>(env _$ func), $<ExecutionMode>(mode), v1, v2, v3);
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionMode___3B_3BI_3J
+  (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray func, jint mode, jlongArray literals){
+	JNI_METHOD_GUARD_ENTER
+	jlong* fetchedLiterals = env->GetLongArrayElements(literals, nullptr);
+	std::vector<unsigned int>* literalsArr = toUnsignedIntVector(fetchedLiterals, env->GetArrayLength(literals));
+	env->ReleaseLongArrayElements(literals, fetchedLiterals, JNI_ABORT);
+	$<Builder*>(env _$ ptr)->addExecutionMode($<Function*>(env _$ func), $<ExecutionMode>(mode), *literalsArr);
+	delete literalsArr;
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addExecutionModeId
+  (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray func, jint mode, jlongArray operandIds){
+	JNI_METHOD_GUARD_ENTER
+	jlong* fetchedOperandIds = env->GetLongArrayElements(operandIds, nullptr);
+	std::vector<Id>* operandIdsArr = toUnsignedIntVector(fetchedOperandIds, env->GetArrayLength(operandIds));
+	env->ReleaseLongArrayElements(operandIds, fetchedOperandIds, JNI_ABORT);
+	$<Builder*>(env _$ ptr)->addExecutionModeId($<Function*>(env _$ func), $<ExecutionMode>(mode), *operandIdsArr);
+	delete operandIdsArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -981,10 +1003,40 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___3BJI_3J
+  (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jint decoration, jlongArray literals){
+	JNI_METHOD_GUARD_ENTER
+	jlong* fetchedLiterals = env->GetLongArrayElements(literals, nullptr);
+	std::vector<unsigned int>* literalsArr = toUnsignedIntVector(fetchedLiterals, env->GetArrayLength(literals));
+	env->ReleaseLongArrayElements(literals, fetchedLiterals, JNI_ABORT);
+	$<Builder*>(env _$ ptr)->addDecoration(id, $<Decoration>(decoration), *literalsArr);
+	delete literalsArr;
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecoration___3BJI_3Ljava_lang_String_2
+  (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jint decoration, jobjectArray strings){
+	JNI_METHOD_GUARD_ENTER
+	Builder* elem = $<Builder*>(env _$ ptr);
+	elem->addDecoration(id, $<Decoration>(decoration), *toCharsVector(env, strings, elem));
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId___3BJIJ
   (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jint decoration, jlong idDecoration){
 	JNI_METHOD_GUARD_ENTER
 	$<Builder*>(env _$ ptr)->addDecorationId(id, $<Decoration>(decoration), idDecoration);
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addDecorationId___3BJI_3J
+  (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jint decoration, jlongArray operandIds){
+	JNI_METHOD_GUARD_ENTER
+	jlong* fetchedOperandIds = env->GetLongArrayElements(operandIds, nullptr);
+	std::vector<Id>* operandIdsArr = toUnsignedIntVector(fetchedOperandIds, env->GetArrayLength(operandIds));
+	env->ReleaseLongArrayElements(operandIds, fetchedOperandIds, JNI_ABORT);
+	$<Builder*>(env _$ ptr)->addDecorationId(id, $<Decoration>(decoration), *operandIdsArr);
+	delete operandIdsArr;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -999,6 +1051,25 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecorat
   (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jlong member, jint decoration, jstring s){
 	JNI_METHOD_GUARD_ENTER
 	$<Builder*>(env _$ ptr)->addMemberDecoration(id, member, $<Decoration>(decoration), toChars(env, s));
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecoration___3BJJI_3J
+  (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jlong member, jint decoration, jlongArray literals){
+	JNI_METHOD_GUARD_ENTER
+	jlong* fetchedLiterals = env->GetLongArrayElements(literals, nullptr);
+	std::vector<unsigned int>* literalsArr = toUnsignedIntVector(fetchedLiterals, env->GetArrayLength(literals));
+	env->ReleaseLongArrayElements(literals, fetchedLiterals, JNI_ABORT);
+	$<Builder*>(env _$ ptr)->addMemberDecoration(id, member, $<Decoration>(decoration), *literalsArr);
+	delete literalsArr;
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_Builder_1addMemberDecoration___3BJJI_3Ljava_lang_String_2
+  (JNIEnv* env, jclass self, jbyteArray ptr, jlong id, jlong member, jint decoration, jobjectArray strings){
+	JNI_METHOD_GUARD_ENTER
+	Builder* elem = $<Builder*>(env _$ ptr);
+	elem->addMemberDecoration(id, member, $<Decoration>(decoration), *toCharsVector(env, strings, elem));
 	JNI_METHOD_GUARD_LEAVE
 }
 

@@ -521,9 +521,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIdMaps_1operatorAt
 JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TNumericFeatures__
   (JNIEnv* env, jclass self){
 	JNI_METHOD_GUARD_ENTER
-	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	return env $_ nullptr;
-	//return env $_ new TNumericFeatures();
+	return env $_ new TNumericFeatures();
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -531,7 +529,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TNumericFeatures___
   (JNIEnv* env, jclass self, jbyteArray rhs){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	return env $_ nullptr;
+	return nullptr;
 	//return env $_ new TNumericFeatures(*$<TNumericFeatures*>(env _$ rhs));
 	JNI_METHOD_GUARD_LEAVE
 }
@@ -540,7 +538,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TNumericFeatures_1o
   (JNIEnv* env, jclass self, jbyteArray ptr, jbyteArray rhs){
 	JNI_METHOD_GUARD_ENTER
 	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	return env $_ nullptr;
+	return nullptr;
 	//return env $_ (*$<TNumericFeatures*>(env _$ ptr) = *$<TNumericFeatures*>(env _$ rhs));
 	JNI_METHOD_GUARD_LEAVE
 }
@@ -548,25 +546,21 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TNumericFeatures_1o
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TNumericFeatures_1insert
   (JNIEnv* env, jclass self, jbyteArray ptr, jint f){
 	JNI_METHOD_GUARD_ENTER
-	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	//$<TNumericFeatures*>(env _$ ptr)->insert($<TNumericFeatures::feature>(f));
+	$<TNumericFeatures*>(env _$ ptr)->insert($<TNumericFeatures::feature>(f));
 	JNI_METHOD_GUARD_LEAVE
 }
 
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TNumericFeatures_1erase
   (JNIEnv* env, jclass self, jbyteArray ptr, jint f){
 	JNI_METHOD_GUARD_ENTER
-	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	//$<TNumericFeatures*>(env _$ ptr)->erase($<TNumericFeatures::feature>(f));
+	$<TNumericFeatures*>(env _$ ptr)->erase($<TNumericFeatures::feature>(f));
 	JNI_METHOD_GUARD_LEAVE
 }
 
 JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TNumericFeatures_1contains
   (JNIEnv* env, jclass self, jbyteArray ptr, jint f){
 	JNI_METHOD_GUARD_ENTER
-	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	return true;
-	//return $<TNumericFeatures*>(env _$ ptr)->contains($<TNumericFeatures::feature>(f));
+	return $<TNumericFeatures*>(env _$ ptr)->contains($<TNumericFeatures::feature>(f));
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -629,22 +623,22 @@ JNIEXPORT jint JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getStage
 JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addRequestedExtension
   (JNIEnv* env, jclass self, jbyteArray ptr, jstring extension){
 	JNI_METHOD_GUARD_ENTER
-	setLastError(env, GLSLANG_ERROR_NOT_YET_IMPLEMENTED);
-	//$<TIntermediate*>(env _$ ptr)->addRequestedExtension(toChars(env, extension));
-	JNI_METHOD_GUARD_LEAVE
-}
-
-JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1updateRequestedExtension
-  (JNIEnv* env, jclass self, jbyteArray ptr, jstring extension, jint behavior){
-	JNI_METHOD_GUARD_ENTER
-	$<TIntermediate*>(env _$ ptr)->updateRequestedExtension(toChars(env, extension), $<TExtensionBehavior>(behavior));
+	$<TIntermediate*>(env _$ ptr)->addRequestedExtension(toChars(env, extension));
 	JNI_METHOD_GUARD_LEAVE
 }
 
 JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getRequestedExtensions
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
-	return env $_ $<TIntermediate*>(env _$ ptr)->getRequestedExtensions();
+	TIntermediate* elem = $<TIntermediate*>(env _$ ptr);
+	std::set<std::string> set = elem->getRequestedExtensions();
+	std::set<TString*>* ret = nullptr;
+	ret = Pool_mallocRegister(ret, elem);
+	for(auto val : set){
+		TString* str = NewPoolTString(val.c_str());
+		ret->insert(str);
+	}
+	return env $_ ret;
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -809,10 +803,10 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addC
 	JNI_METHOD_GUARD_LEAVE
 }
 
-JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addConversion___3BI_3B_3B
+JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1addPairConversion
   (JNIEnv* env, jclass self, jbyteArray ptr, jint op, jbyteArray node0, jbyteArray node1){
 	JNI_METHOD_GUARD_ENTER
-	std::tuple<TIntermTyped*, TIntermTyped*> ret = $<TIntermediate*>(env _$ ptr)->addConversion($<TOperator>(op), $<TIntermTyped*>(env _$ node0), $<TIntermTyped*>(env _$ node1));
+	std::tuple<TIntermTyped*, TIntermTyped*> ret = $<TIntermediate*>(env _$ ptr)->addPairConversion($<TOperator>(op), $<TIntermTyped*>(env _$ node0), $<TIntermTyped*>(env _$ node1));
 	return env $_ std::make_pair(std::get<0>(ret), std::get<1>(ret));
 	JNI_METHOD_GUARD_LEAVE
 }
@@ -2066,6 +2060,34 @@ JNIEXPORT jobjectArray JNICALL Java_com_destranix_glslang_Main_TIntermediate_1ge
   (JNIEnv* env, jclass self, jbyteArray ptr){
 	JNI_METHOD_GUARD_ENTER
 	return toStringArray(env, $<TIntermediate*>(env _$ ptr)->getProcesses());
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticInt8Enabled
+  (JNIEnv* env, jclass self, jbyteArray ptr){
+	JNI_METHOD_GUARD_ENTER
+	return $<TIntermediate*>(env _$ ptr)->getArithemeticInt8Enabled();
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticInt16Enabled
+  (JNIEnv* env, jclass self, jbyteArray ptr){
+	JNI_METHOD_GUARD_ENTER
+	return $<TIntermediate*>(env _$ ptr)->getArithemeticInt16Enabled();
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TIntermediate_1getArithemeticFloat16Enabled
+  (JNIEnv* env, jclass self, jbyteArray ptr){
+	JNI_METHOD_GUARD_ENTER
+	return $<TIntermediate*>(env _$ ptr)->getArithemeticFloat16Enabled();
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TIntermediate_1updateNumericFeature
+  (JNIEnv* env, jclass self, jbyteArray ptr, jint f, jboolean on){
+	JNI_METHOD_GUARD_ENTER
+	$<TIntermediate*>(env _$ ptr)->updateNumericFeature($<TNumericFeatures::feature>(f), on);
 	JNI_METHOD_GUARD_LEAVE
 }
 

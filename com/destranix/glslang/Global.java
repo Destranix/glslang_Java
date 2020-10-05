@@ -378,5 +378,9 @@ public class Global {
 	public static void inReadableOrder(Block root, Void_BytearrayIntBytearray callback) {
 		Main.inReadableOrder(root.getPtr(), callback);
 	}
+	
+	public static boolean InitializePoolIndex(){
+		return Main.InitializePoolIndex();
+	}
 
 }

@@ -427,7 +427,7 @@ JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_TDefaultIoResolverBas
 JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TDefaultGlslIoResolver
   (JNIEnv* env, jclass self, jbyteArray intermediate){
 	JNI_METHOD_GUARD_ENTER
-	return env $_ Pool_malloc($<TDefaultGlslIoResolver*>(nullptr), *$<TIntermediate*>(env _$ intermediate));
+	return env $_ Pool_mallocIndirect($<TDefaultGlslIoResolver*>(nullptr), $<TIntermediate*>(env _$ intermediate));
 	JNI_METHOD_GUARD_LEAVE
 }
 

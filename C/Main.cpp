@@ -21,6 +21,7 @@
 #include <glslang/Include/ShHandle.h>
 #include <glslang/Include/BaseTypes.h>
 #include <glslang/Include/Types.h>
+#include <glslang/Include/InitializeGlobals.h>
 #include <glslang/MachineIndependent/RemoveTree.h>
 #include <glslang/MachineIndependent/propagateNoContraction.h>
 #include <glslang/Include/arrays.h>
@@ -720,6 +721,13 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_inReadableOrder
 	std::function<void(spv::Block*, spv::ReachReason, spv::Block*)>* callbackRef = createCallback(callbackTmp, nullptr);
 	spv::inReadableOrder($<spv::Block*>(env _$ root), *callbackRef);
 	delete callbackRef;
+	JNI_METHOD_GUARD_LEAVE
+}
+
+JNIEXPORT jboolean JNICALL Java_com_destranix_glslang_Main_InitializePoolIndex
+  (JNIEnv* env, jclass self){
+	JNI_METHOD_GUARD_ENTER
+	return InitializePoolIndex();
 	JNI_METHOD_GUARD_LEAVE
 }
 

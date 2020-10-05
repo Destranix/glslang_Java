@@ -8,11 +8,11 @@ FILES = Utils.cpp Main.cpp PureC.cpp Basic.cpp Hlsl.cpp SPV.cpp Common.cpp Const
 #ASSEMBLY_FILES_OBJ = RegisterSaveRestore.obj
 #ASSEMBLY_FILES_LIBS = RegisterSaveRestore.lib
 
-LIBS_INCLUDE = -lGenericCodeGen -lMachineIndependent -lOSDependent -lSPVRemapper -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lSPIRV-Tools-shared -lSPIRV-Tools-reduce 
-LIBS = GenericCodeGen.lib MachineIndependent.lib OSDependent.lib SPVRemapper.lib Spirv.lib SPIRV-Tools-opt.lib SPIRV-Tools.lib SPIRV-Tools-shared.lib SPIRV-Tools-reduce.lib
+LIBS_INCLUDE = -lGenericCodeGen -lMachineIndependent -lOGLCompiler -lOSDependent -lSPVRemapper -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lSPIRV-Tools-shared -lSPIRV-Tools-reduce 
+LIBS = GenericCodeGen.lib MachineIndependent.lib OGLCompiler.lib OSDependent.lib SPVRemapper.lib Spirv.lib SPIRV-Tools-opt.lib SPIRV-Tools.lib SPIRV-Tools-shared.lib SPIRV-Tools-reduce.lib
 
-#LIBS_INCLUDE_DEBUG = -lGenericCodeGend -lMachineIndependentd -lOSDependentd -lSPVRemapperd -lSPIRVd -lSPIRV-Tools-optd -lSPIRV-Toolsd -lSPIRV-Tools-sharedd -lSPIRV-Tools-reduced
-LIBS_DEBUG = GenericCodeGend.lib MachineIndependentd.lib OSDependentd.lib SPVRemapperd.lib Spirvd.lib SPIRV-Tools-optd.lib SPIRV-Toolsd.lib SPIRV-Tools-sharedd.lib SPIRV-Tools-reduced.lib
+#LIBS_INCLUDE_DEBUG = -lGenericCodeGend -lMachineIndependentd -lOGLCompiledr -lOSDependentd -lSPVRemapperd -lSPIRVd -lSPIRV-Tools-optd -lSPIRV-Toolsd -lSPIRV-Tools-sharedd -lSPIRV-Tools-reduced
+LIBS_DEBUG = GenericCodeGend.lib MachineIndependentd.lib OGLCompilerd.lib OSDependentd.lib SPVRemapperd.lib Spirvd.lib SPIRV-Tools-optd.lib SPIRV-Toolsd.lib SPIRV-Tools-sharedd.lib SPIRV-Tools-reduced.lib
 
 LINUX_CC_FLAGS = -std=c++11 -pedantic -Wall -Werror -Wno-trigraphs -D_XOPEN_SOURCE=700 -fPIC -pthread -fno-rtti -Wl,-z,defs
 LINUX_INCLUDE_FLAGS = -I. -I./include -I"${JAVA_HOME}/include" -I"${JAVA_HOME}/include/linux"

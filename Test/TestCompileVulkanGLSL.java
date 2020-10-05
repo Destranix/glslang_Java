@@ -6,6 +6,7 @@ import static com.destranix.glslang.Main.InitializeProcess;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.Map;
 
 import com.destranix.glslang.EShClient;
 import com.destranix.glslang.EShLanguage;
@@ -15,12 +16,14 @@ import com.destranix.glslang.EShTargetClientVersion;
 import com.destranix.glslang.EShTargetLanguage;
 import com.destranix.glslang.EShTargetLanguageVersion;
 import com.destranix.glslang.Global;
+import com.destranix.glslang.PointerBoundObject;
 import com.destranix.glslang.SpvBuildLogger;
 import com.destranix.glslang.SpvOptions;
 import com.destranix.glslang.TBuiltInResource;
 import com.destranix.glslang.TLimits;
 import com.destranix.glslang.TProgram;
 import com.destranix.glslang.TShader;
+import com.destranix.glslang.TString;
 
 public class TestCompileVulkanGLSL {
 	
@@ -203,6 +206,10 @@ public class TestCompileVulkanGLSL {
 		if(!program.link(EnumSet.of(EShMessages.EShMsgDefault))) {throw new AssertionError("Could not link program!\r\n"+"Program Debuglog:\r\n"+program.getInfoLog());};
 		
 		System.out.println("Program Infolog:\r\n"+program.getInfoLog());
+		
+		for(PointerBoundObject ext : program.getIntermediate(EShLanguage.EShLangVertex).getRequestedExtensions()){
+			System.out.println(ext.cast(TString.class).asString());
+		}
 		
 		long[][] spirv = new long[1][];
 		SpvBuildLogger logger = new SpvBuildLogger();

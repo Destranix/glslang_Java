@@ -589,6 +589,14 @@ public class Builder extends PointerBoundObject {
 	public void addExecutionMode(Function func, ExecutionMode mode, int value1, int value2, int value3) {
 		Main.Builder_addExecutionMode(ptr, func.getPtr(), mode, value1, value2, value3);
 	}
+	
+	public void addExecutionMode(Function func, ExecutionMode mode, long[] literals) {
+		Main.Builder_addExecutionMode(ptr, func.getPtr(), mode, literals);
+	}
+	
+	public void addExecutionModeId(Function func, ExecutionMode mode, long[] operandIds) {
+		Main.Builder_addExecutionModeId(ptr, func.getPtr(), mode, operandIds);
+	}
 
 	public void addName(long id, String name) {
 		Main.Builder_addName(ptr, id, name);
@@ -609,9 +617,21 @@ public class Builder extends PointerBoundObject {
 	public void addDecoration(long id, Decoration decoration, String s) {
 		Main.Builder_addDecoration(ptr, id, decoration, s);
 	}
+	
+	public void addDecoration(long id, Decoration decoration, long[] literals) {
+		Main.Builder_addDecoration(ptr, id, decoration, literals);
+	}
+	
+	public void addDecoration(long id, Decoration decoration, String[] strings) {
+		Main.Builder_addDecoration(ptr, id, decoration, strings);
+	}
 
 	public void addDecorationId(long id, Decoration decoration, long idDecoration) {
 		Main.Builder_addDecorationId(ptr, id, decoration, idDecoration);
+	}
+	
+	public void addDecorationId(long id, Decoration decoration, long[] operandIds) {
+		Main.Builder_addDecorationId(ptr, id, decoration, operandIds);
 	}
 
 	public void addMemberDecoration(long id, long member, Decoration decoration) {
@@ -624,6 +644,14 @@ public class Builder extends PointerBoundObject {
 
 	public void addMemberDecoration(long id, long member, Decoration decoration, String s) {
 		Main.Builder_addMemberDecoration(ptr, id, member, decoration, s);
+	}
+	
+	public void addMemberDecoration(long id, long member, Decoration decoration, long[] literals) {
+		Main.Builder_addMemberDecoration(ptr, id, member, decoration, literals);
+	}
+	
+	public void addMemberDecoration(long id, long member, Decoration decoration, String[] strings) {
+		Main.Builder_addMemberDecoration(ptr, id, member, decoration, strings);
 	}
 
 	public void setBuildPoint(Block bp) {
