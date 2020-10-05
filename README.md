@@ -5,7 +5,7 @@ https://github.com/KhronosGroup/glslang
 ### Commit:
 f05c076e26b04cbcc9bf2df815bbdc9c620d89ad
 
-##NOTE:
+## NOTE:
 In the current commit, some functions might not work on Linux systems, throwing segfaults. This also takes effect on on of the tests. I'm investigating that bug(not urgent, cause I'm probably the only one who uses this repro ;-).
 
 ## Build
