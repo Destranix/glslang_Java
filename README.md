@@ -8,6 +8,8 @@ f05c076e26b04cbcc9bf2df815bbdc9c620d89ad
 ## NOTE:
 In the current commit, some functions might not work on Linux systems, throwing segfaults. This also takes effect on on of the tests. I'm investigating that bug(not urgent, cause I'm probably the only one who uses this repro ;-).
 
+EDIT: Seems like it does also not work on window. Consider using an older commit, till I fixed that issue.
+
 ## Build
 ### Dependencies
 Same as glslang:
