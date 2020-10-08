@@ -288,6 +288,8 @@ template<typename T> inline void Pool_register(void* key, T* value){
 //Frees instances connected to deleted object
 void Pool_cleanup(void* key);
 
+void freeAllocationPool();
+
 jstring toString(JNIEnv* env, const char* chars);
 
 jstring toString(JNIEnv* env, const glslang::TString* chars);
@@ -305,6 +307,8 @@ glslang::TString* toTString(JNIEnv* env, jstring s);
 glslang::TString* toTString(JNIEnv* env, jstring s, int length);
 
 std::string toCString(JNIEnv* env, jstring s);
+
+std::string toCString(JNIEnv* env, jstring s, int length);
 
 const char* toChars(JNIEnv* env, jstring s);
 

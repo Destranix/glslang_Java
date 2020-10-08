@@ -1779,7 +1779,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers__
 	ret->pointMode = pointMode;
 	if((int) (env)->GetArrayLength(localSize) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
-		return pointerToByteArray(env, nullptr);
+		return nullptr;
 	}
 	int* fetchedLocalSize = (int*) (env)->GetIntArrayElements(localSize, nullptr);
 	ret->localSize[0] = fetchedLocalSize[0];
@@ -1788,7 +1788,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers__
 	(env)->ReleaseIntArrayElements(localSize, (jint*) fetchedLocalSize, JNI_ABORT);
 	if((int) (env)->GetArrayLength(localSizeNotDefault) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
-		return pointerToByteArray(env, nullptr);
+		return nullptr;
 	}
 	bool* fetchedLocalSizeNotDefault = (bool*) (env)->GetBooleanArrayElements(localSizeNotDefault, nullptr);
 	ret->localSizeNotDefault[0] = fetchedLocalSizeNotDefault[0];
@@ -1797,7 +1797,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers__
 	(env)->ReleaseBooleanArrayElements(localSizeNotDefault, (jboolean*) fetchedLocalSizeNotDefault, JNI_ABORT);
 	if((int) (env)->GetArrayLength(localSizeSpecId) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
-		return pointerToByteArray(env, nullptr);
+		return nullptr;
 	}
 	int* fetchedLocalSizeSpecId = (int*) (env)->GetIntArrayElements(localSizeSpecId, nullptr);
 	ret->localSizeSpecId[0] = fetchedLocalSizeSpecId[0];
@@ -1915,12 +1915,13 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers_1setLoc
 	JNI_METHOD_GUARD_ENTER
 	if((int) (env)->GetArrayLength(v) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
+	}else{
+		int* fetchedLocalSize = (int*) (env)->GetIntArrayElements(v, nullptr);
+		$<TShaderQualifiers*>(env _$ ptr)->localSize[0] = fetchedLocalSize[0];
+		$<TShaderQualifiers*>(env _$ ptr)->localSize[1] = fetchedLocalSize[1];
+		$<TShaderQualifiers*>(env _$ ptr)->localSize[2] = fetchedLocalSize[2];
+		(env)->ReleaseIntArrayElements(v, (jint*) fetchedLocalSize, JNI_ABORT);
 	}
-	int* fetchedLocalSize = (int*) (env)->GetIntArrayElements(v, nullptr);
-	$<TShaderQualifiers*>(env _$ ptr)->localSize[0] = fetchedLocalSize[0];
-	$<TShaderQualifiers*>(env _$ ptr)->localSize[1] = fetchedLocalSize[1];
-	$<TShaderQualifiers*>(env _$ ptr)->localSize[2] = fetchedLocalSize[2];
-	(env)->ReleaseIntArrayElements(v, (jint*) fetchedLocalSize, JNI_ABORT);
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -1929,11 +1930,12 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers_1setLoc
 	JNI_METHOD_GUARD_ENTER
 	if((int) (env)->GetArrayLength(v) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
+	}else{
+		bool* fetchedLocalSizeNotDefault = (bool*) (env)->GetBooleanArrayElements(v, nullptr);
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[0] = fetchedLocalSizeNotDefault[0];
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[1] = fetchedLocalSizeNotDefault[1];
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[2] = fetchedLocalSizeNotDefault[2];
 	}
-	bool* fetchedLocalSizeNotDefault = (bool*) (env)->GetBooleanArrayElements(v, nullptr);
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[0] = fetchedLocalSizeNotDefault[0];
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[1] = fetchedLocalSizeNotDefault[1];
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeNotDefault[2] = fetchedLocalSizeNotDefault[2];
 	JNI_METHOD_GUARD_LEAVE
 }
 
@@ -1942,12 +1944,13 @@ JNIEXPORT void JNICALL Java_com_destranix_glslang_Main_TShaderQualifiers_1setLoc
 	JNI_METHOD_GUARD_ENTER
 	if((int) (env)->GetArrayLength(v) != 3){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
+	}else{
+		int* fetchedLocalSizeSpecId = (int*) (env)->GetIntArrayElements(v, nullptr);
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[0] = fetchedLocalSizeSpecId[0];
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[1] = fetchedLocalSizeSpecId[1];
+		$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[2] = fetchedLocalSizeSpecId[2];
+		(env)->ReleaseIntArrayElements(v, (jint*) fetchedLocalSizeSpecId, JNI_ABORT);
 	}
-	int* fetchedLocalSizeSpecId = (int*) (env)->GetIntArrayElements(v, nullptr);
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[0] = fetchedLocalSizeSpecId[0];
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[1] = fetchedLocalSizeSpecId[1];
-	$<TShaderQualifiers*>(env _$ ptr)->localSizeSpecId[2] = fetchedLocalSizeSpecId[2];
-	(env)->ReleaseIntArrayElements(v, (jint*) fetchedLocalSizeSpecId, JNI_ABORT);
 	JNI_METHOD_GUARD_LEAVE
 }
 

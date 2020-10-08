@@ -162,7 +162,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TBuiltInResource___
 	int length = (int) (env)->GetArrayLength(values);
 	if(length != 93){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
-		return pointerToByteArray(env, nullptr);
+		return NULL;
 	}
 	int* fetchedArray = (int*) (env)->GetIntArrayElements(values, nullptr);
 	int* fetchedArraySaved = fetchedArray;
@@ -280,7 +280,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_TLimits___3Z
 	int length = (int) (env)->GetArrayLength(values);
 	if(length != 9){
 		setLastError(env, GLSLANG_ERROR_INVALID_LENGTH);
-		return pointerToByteArray(env, nullptr);
+		return NULL;
 	}
 	bool* fetchedArray = (bool*) (env)->GetBooleanArrayElements(values, nullptr);
 	bool* fetchedArraySaved = fetchedArray;

@@ -785,7 +785,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_destranix_glslang_Main_Array_1get
 	int size = array->size();
 	if(i >= size || i < 0){
 		setLastError(env, GLSLANG_ERROR_ARRAY_INDEX_OUT_OF_BOUNDS);
-		return env $_ nullptr;
+		return nullptr;
 	}else{
 		return env $_ (*array)[i];
 	}

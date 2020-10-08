@@ -11,6 +11,7 @@ public class TestAll {
 				"-noCallInitFuncts", 
 				"-noDestruct"//Destruction leads to bad allocation in following tests. No further investigation since C-API is deprecated anyway
 				};
+		//com.destranix.glslang.Main.setCatchCExceptions(false);
 		InitializeProcess();
 		TestCompileOpenGlHLSL.main(testArgs);
 		TestCompileVulkanGLSL.main(testArgs);

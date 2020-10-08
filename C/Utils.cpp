@@ -281,6 +281,10 @@ static JavaVM* jvm = nullptr;
 	}
 #endif
 
+void JNI_OnUnload(JavaVM* vm, void* reserved){
+	freeAllocationPool();
+}
+
 static thread_local int lastError = GLSLANG_ERROR_NONE;
 static thread_local GlslangErrorMode errorMode = GlslangErrorModeCode;
 #ifdef WINDOWS
@@ -342,27 +346,92 @@ jobjectArray toStringArray(JNIEnv* env, const char** a, int length){
 	return ret;
 }
 
+static const char* toUTF8Bytes(JNIEnv* env, jstring s, int length){
+	int utfLength = (env)->GetStringUTFLength(s);
+	char* sRef = (char*) (env)->GetStringUTFChars(s, nullptr);
+	if(length == -1){
+		//Determine length
+		length = 0;
+		int i=0;
+		while(i<utfLength){
+			if((sRef[i] & 0xe0) == 0xe0){//3 Byte character or surrogate
+				if((sRef[i] & 0xed) == 0xed){//surrogate
+					length += 4;
+					i += 6;
+				}else{//3 Byte character
+					length += 3;
+					i += 3;
+				}
+			}else if((sRef[i] & 0xc0) == 0xc0){//2 Byte character
+				if(sRef[i] == 0xc0 && sRef[i+1] == 0x80){//Null character
+					length += 1;
+				}else{
+					length += 2;
+				}
+				i += 2;
+			}else{//1 Byte character
+				length += 1;
+				i += 1;
+			}
+		}
+	}
+	char* ret = Pool_calloc($<char*>(nullptr), length+1);
+	int srcIndex = 0;
+	int dstIndex = 0;
+	while(srcIndex<utfLength){
+		if((sRef[srcIndex] & 0xe0) == 0xe0){//3 Byte character or surrogate
+			if((sRef[srcIndex] & 0xed) == 0xed){//surrogate
+				ret[dstIndex] = 0xF0 | ((sRef[srcIndex+1] & 0x1c) >> 2);
+				ret[dstIndex+1] = 0x80 | ((sRef[srcIndex+1]  & 0x03) << 4) | ((sRef[srcIndex+2]  & 0x3c) >> 2);
+				ret[dstIndex+2] = 0x80 | ((sRef[srcIndex+2]  & 0x03) << 4) | (sRef[srcIndex+4]  & 0x0f);
+				ret[dstIndex+3] = sRef[srcIndex+5];
+				dstIndex += 4;
+				srcIndex += 6;
+			}else{//3 Byte character
+				ret[dstIndex] = sRef[srcIndex];
+				ret[dstIndex+1] = sRef[srcIndex+1];
+				ret[dstIndex+2] = sRef[srcIndex+2];
+				dstIndex += 3;
+				srcIndex += 3;
+			}
+		}else if((sRef[srcIndex] & 0xc0) == 0xc0){//2 Byte character
+			if(sRef[srcIndex] == 0xc0 && sRef[srcIndex+1] == 0x80){//Null character
+				ret[dstIndex] = '\0';
+				dstIndex += 1;
+			}else{
+				ret[dstIndex] = sRef[srcIndex];
+				ret[dstIndex+1] = sRef[srcIndex+1];
+				dstIndex += 2;
+			}
+			srcIndex += 2;
+		}else{//1 Byte character
+			ret[dstIndex] = sRef[srcIndex];
+			dstIndex += 1;
+			srcIndex += 1;
+		}
+	}
+	ret[dstIndex] = '\0';
+	(env)->ReleaseStringUTFChars(s, sRef);
+	return ret;
+}
+
+static const char* toUTF8Bytes(JNIEnv* env, jstring s){
+	return toUTF8Bytes(env, s, -1);
+}
+
+
 glslang::TString* toTString(JNIEnv* env, jstring s){
 	if(s == nullptr){
 		return nullptr;
 	}
-	char* sRef = (char*) (env)->GetStringUTFChars(s, nullptr);
-	glslang::TString* ret = glslang::NewPoolTString(sRef);
-	(env)->ReleaseStringUTFChars(s, sRef);
-	return ret;
+	return glslang::NewPoolTString(toChars(env, s));
 }
 
 glslang::TString* toTString(JNIEnv* env, jstring s, int length){
 	if(s == nullptr){
 		return nullptr;
 	}
-	char* sRef = (char*) (env)->GetStringUTFChars(s, nullptr);
-	char* sRefCpy = new char[length];
-	sRefCpy = strncpy(sRefCpy, sRef, length);
-	glslang::TString* ret = glslang::NewPoolTString(sRefCpy);
-	(env)->ReleaseStringUTFChars(s, sRef);
-	delete[] sRefCpy;
-	return ret;
+	return glslang::NewPoolTString(toChars(env, s, length));
 }
 
 std::string toCString(JNIEnv* env, jstring s){
@@ -372,18 +441,25 @@ std::string toCString(JNIEnv* env, jstring s){
 	return std::string(toChars(env, s));
 }
 
+std::string toCString(JNIEnv* env, jstring s, int length){
+	if(s == nullptr){
+		return NULL;
+	}
+	return std::string(toChars(env, s, length));
+}
+
 const char* toChars(JNIEnv* env, jstring s){
 	if(s == nullptr){
 		return NULL;
 	}
-	return toTString(env, s)->c_str();
+	return toUTF8Bytes(env, s);
 }
 
 const char* toChars(JNIEnv* env, jstring s, int length){
 	if(s == nullptr){
 		return nullptr;
 	}
-	return toTString(env, s, length)->c_str();
+	return toUTF8Bytes(env, s, length);
 }
 
 const char** toCharArrays(JNIEnv* env, jobjectArray s, void* ref){
@@ -463,7 +539,9 @@ static bool littleEndian(){
 static jbyteArray BigIntegerToByteArray(JNIEnv* env, jobject v){
 	jclass clazz = env->FindClass("java/math/BigInteger");
 	jmethodID id = env->GetMethodID(clazz, "toByteArray", "()[B");
-	return $<jbyteArray>(env->CallObjectMethod(v, id));
+	jbyteArray ret = $<jbyteArray>(env->CallObjectMethod(v, id));
+	env->ExceptionCheck();//Needs to be called, otherwise Xcheck:jni will throw a warning
+	return ret;
 }
 
 long long BigIntegerToLongLong(JNIEnv* env, jobject v){
@@ -713,5 +791,16 @@ void Pool_cleanup(void* key){
 		}
 		delete elements;
 		allocationPool.erase(key);
+	}
+}
+
+void freeAllocationPool(){
+	for(auto entry : allocationPool){
+		std::set<std::function<void()>*>* elements = entry.second;
+		for(std::function<void()>* elem : *elements){
+			(*elem)();
+			delete elem;
+		}
+		delete elements;
 	}
 }
