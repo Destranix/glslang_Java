@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import com.destranix.glslang.GlslangError;
 import com.destranix.glslang.GlslangErrorMode;
+import com.destranix.glslang.TString;
 
 public class TestSpecialFunctions {
 
@@ -50,6 +51,8 @@ public class TestSpecialFunctions {
 		}catch(Throwable t){}finally{
 			delete(limits);	
 		}
+		
+		new TString("abc");
 		
 		System.out.println("Test succeeded!");
 		if(callInitFuncts){

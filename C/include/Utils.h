@@ -286,7 +286,7 @@ template<typename T> inline void Pool_register(void* key, T* value){
 }
 
 //Frees instances connected to deleted object
-void Pool_cleanup(void* key);
+void Pool_cleanup(const void* key);
 
 void freeAllocationPool();
 

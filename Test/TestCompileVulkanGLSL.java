@@ -6,7 +6,6 @@ import static com.destranix.glslang.Main.InitializeProcess;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.Map;
 
 import com.destranix.glslang.EShClient;
 import com.destranix.glslang.EShLanguage;

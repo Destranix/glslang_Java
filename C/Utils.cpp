@@ -25,10 +25,13 @@
 #define ENABLE_HLSL
 
 #include <glslang/Include/Common.h>
+#include <glslang/Include/PoolAlloc.h>
 
 #include <Utils.h>
 
 static JavaVM* jvm = nullptr;
+
+static thread_local glslang::TPoolAllocator customTStringPoolAllocator;
 
 #ifdef LINUX
 	void printCStackTrace(int sig) {
@@ -349,36 +352,37 @@ jobjectArray toStringArray(JNIEnv* env, const char** a, int length){
 static const char* toUTF8Bytes(JNIEnv* env, jstring s, int length){
 	int utfLength = (env)->GetStringUTFLength(s);
 	char* sRef = (char*) (env)->GetStringUTFChars(s, nullptr);
-	if(length == -1){
-		//Determine length
-		length = 0;
-		int i=0;
-		while(i<utfLength){
-			if((sRef[i] & 0xe0) == 0xe0){//3 Byte character or surrogate
-				if((sRef[i] & 0xed) == 0xed){//surrogate
-					length += 4;
-					i += 6;
-				}else{//3 Byte character
-					length += 3;
-					i += 3;
-				}
-			}else if((sRef[i] & 0xc0) == 0xc0){//2 Byte character
-				if(sRef[i] == 0xc0 && sRef[i+1] == 0x80){//Null character
-					length += 1;
-				}else{
-					length += 2;
-				}
-				i += 2;
-			}else{//1 Byte character
-				length += 1;
-				i += 1;
+
+	//Determine length
+	int outLength = 0;
+	int i=0;
+	int charCount = 0;
+	while((length == -1 || charCount < length) && i<utfLength){
+		if((sRef[i] & 0xe0) == 0xe0){//3 Byte character or surrogate
+			if((sRef[i] & 0xed) == 0xed){//surrogate
+				outLength += 4;
+				i += 6;
+			}else{//3 Byte character
+				outLength += 3;
+				i += 3;
 			}
+		}else if((sRef[i] & 0xc0) == 0xc0){//2 Byte character
+			if(sRef[i] == 0xc0 && sRef[i+1] == 0x80){//Null character
+				outLength += 1;
+			}else{
+				outLength += 2;
+			}
+			i += 2;
+		}else{//1 Byte character
+			outLength += 1;
+			i += 1;
 		}
+		charCount++;
 	}
-	char* ret = Pool_calloc($<char*>(nullptr), length+1);
+	char* ret = Pool_calloc($<char*>(nullptr), outLength+1);
 	int srcIndex = 0;
 	int dstIndex = 0;
-	while(srcIndex<utfLength){
+	while(dstIndex<outLength){
 		if((sRef[srcIndex] & 0xe0) == 0xe0){//3 Byte character or surrogate
 			if((sRef[srcIndex] & 0xed) == 0xed){//surrogate
 				ret[dstIndex] = 0xF0 | ((sRef[srcIndex+1] & 0x1c) >> 2);
@@ -424,28 +428,42 @@ glslang::TString* toTString(JNIEnv* env, jstring s){
 	if(s == nullptr){
 		return nullptr;
 	}
-	return glslang::NewPoolTString(toChars(env, s));
+	const char* chars = toChars(env, s);
+	void* memory = customTStringPoolAllocator.allocate(sizeof(glslang::TString));
+	glslang::TString* ret = new(memory) glslang::TString(chars);
+	Pool_cleanup(chars);
+	return ret;
 }
 
 glslang::TString* toTString(JNIEnv* env, jstring s, int length){
 	if(s == nullptr){
 		return nullptr;
 	}
-	return glslang::NewPoolTString(toChars(env, s, length));
+	const char* chars = toChars(env, s, length);
+	void* memory = customTStringPoolAllocator.allocate(sizeof(glslang::TString));
+	glslang::TString* ret = new(memory) glslang::TString(chars);
+	Pool_cleanup(chars);
+	return ret;
 }
 
 std::string toCString(JNIEnv* env, jstring s){
 	if(s == nullptr){
 		return NULL;
 	}
-	return std::string(toChars(env, s));
+	const char* chars = toChars(env, s);
+	std::string ret = std::string(chars);
+	Pool_cleanup(chars);
+	return ret;
 }
 
 std::string toCString(JNIEnv* env, jstring s, int length){
 	if(s == nullptr){
 		return NULL;
 	}
-	return std::string(toChars(env, s, length));
+	const char* chars = toChars(env, s, length);
+	std::string ret = std::string(chars);
+	Pool_cleanup(chars);
+	return ret;
 }
 
 const char* toChars(JNIEnv* env, jstring s){
@@ -781,7 +799,7 @@ void throwException(JNIEnv* env, const char* name, const char* message){
 }
 
 //Frees instances connected to deleted object
-void Pool_cleanup(void* key){
+void Pool_cleanup(const void* key){
 	auto entry = allocationPool.find(key);
 	if(entry != allocationPool.end()){
 		std::set<std::function<void()>*>* elements = entry->second;
